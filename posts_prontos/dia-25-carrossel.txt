@@ -1,0 +1,38 @@
+DIA 25 — 15/05 11:00
+Formato: Carrossel (6 slides)
+Pilar: Educacional
+Ebook: 1-MultiCloud-FinOps
+Criativo sugerido: Carrossel com snippets SQL em fundo escuro
+
+==================================================
+TÍTULO: 5 queries SQL que me economizam 30% na AWS todo mês
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Se sua empresa ainda não exporta AWS Cost & Usage Report pra S3 → Athena, já tá perdendo dinheiro.
+
+Top 5 queries que eu rodo todo dia 5 do mês:
+
+1. Serviços com crescimento > 20% vs mês anterior
+(pega spike cedo)
+
+2. Recursos sem tag de "owner" ou "cost_center"
+(responsabilização — quem gastou?)
+
+3. EBS volumes não attached há > 7 dias
+(órfãos queimando dinheiro)
+
+4. Data transfer entre AZs
+(arquitetura errada = conta cara)
+
+5. Reserved Instances com utilization < 80%
+(compromisso mal dimensionado)
+
+No Ebook 1 da Trilha DEVOPSRAIZ eu encaixo tudo isso num painel Node.js + React com IA que gera RECOMENDAÇÃO automática ("desatache esse EBS aqui e economize USD 23/mês").
+
+👉 Link na bio.
+
+✨ Salvar + comentar quais queries você roda
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #finops #sql #aws

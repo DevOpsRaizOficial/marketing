@@ -1,0 +1,44 @@
+DIA 13 — 03/05 19:00
+Formato: Carrossel (8 slides)
+Pilar: Educacional
+Ebook: 4-IA-RAG-Agents
+Criativo sugerido: Carrossel verde com fluxo animado de function calling
+
+==================================================
+TÍTULO: Function Calling: sua IA deixa de ser chatbot e vira agente
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Chatbot: responde texto.
+Agente: EXECUTA ações no seu sistema.
+
+A diferença? Function Calling (OpenAI) / Tool Use (Claude).
+
+Exemplo real do Ebook 1 da Trilha:
+
+Usuário pergunta: "quanto gastei com EC2 em março?"
+
+Agente:
+1. Identifica que precisa da tool `query_costs`
+2. Chama: query_costs(provider:'AWS', service:'EC2', period:'2026-03')
+3. Sistema executa query no banco
+4. Retorna: R$ 4.231,55
+5. Agente formula: "Você gastou R$ 4.231,55 com EC2 em março, 23% acima do mês anterior. Quer que eu crie um alerta?"
+
+Com Function Calling bem feito a IA:
+→ Consulta seu banco de dados
+→ Cria alertas
+→ Gera relatórios
+→ Envia email
+→ Chama webhook
+
+⚠️ Regra de ouro: NUNCA deixe a IA executar SQL direto. Sempre via função controlada (validation + RBAC).
+
+Código TS completo no Ebook 4 da Trilha.
+
+👉 Link na bio.
+
+✨ Salvar + compartilhar com dev que usa IA
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #openai #anthropic #aiagents

@@ -1,0 +1,49 @@
+DIA 17 — 07/05 19:30
+Formato: Carrossel (9 slides)
+Pilar: Educacional
+Ebook: 1-MultiCloud-FinOps
+Criativo sugerido: Diagrama de arquitetura azul com setas e camadas
+
+==================================================
+TÍTULO: Arquitetura: plataforma FinOps Multi-Cloud do zero
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Vou quebrar a arquitetura completa que construímos no Ebook 1:
+
+FRONTEND (React + Vite + Tailwind)
+↓ REST API HTTPS
+BACKEND (Node.js + Express + TypeScript)
+├─ Auth (JWT + Refresh Token)
+├─ Cost Engine (agregações)
+├─ AI Module (Claude/OpenAI)
+├─ Alerts
+└─ Reports
+↓ Adapter Pattern ↓
+AWS Cost Explorer / Azure Cost Mgmt / GCP Billing / OCI Usage
+↓
+PostgreSQL (Prisma ORM)
+└─ users, credentials (encrypted AES-256-GCM), costs, alerts, ai_history
+
+Por que Adapter Pattern?
+Cada cloud tem API diferente. Adapter normaliza num schema comum.
+
+Por que credenciais encriptadas?
+AES-256-GCM no DB + chave em env. Se vazar o DB, credencial não vaza.
+
+Por que Prisma?
+Middleware injeta clientId automaticamente (Row-Level Isolation).
+
+💡 Esse é o projeto que conecta TODA a Trilha DEVOPSRAIZ.
+Ebook 2 faz deploy em K8s.
+Ebook 3 vira SaaS com billing Hotmart.
+Ebook 4 adiciona IA conversacional.
+Ebook 5 monitora tudo.
+Ebook 6 blinda contra OWASP.
+
+👉 Link na bio.
+
+✨ Salvar + seguir
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #architecture #finops #fullstack

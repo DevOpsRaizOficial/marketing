@@ -1,0 +1,94 @@
+name: Publicar post do dia — DEVOPSRAIZ
+
+# Roda 3x por dia, no horário dos slots mais comuns do calendário:
+#   08:00 BRT (11:00 UTC)  → posts da manhã
+#   12:00 BRT (15:00 UTC)  → posts do almoço
+#   19:00 BRT (22:00 UTC)  → posts da noite
+# O script checa se o post do dia atual tem um dos horários que "bate"
+# com o momento da execução e publica; caso contrário, só registra "nada a fazer".
+#
+# Você também pode disparar manualmente pelo GitHub (Actions → Run workflow).
+
+on:
+  schedule:
+    - cron: "0 11 * * *"   # 08:00 BRT
+    - cron: "0 15 * * *"   # 12:00 BRT
+    - cron: "0 22 * * *"   # 19:00 BRT
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "Dia do calendário (1-30). Vazio = hoje."
+        required: false
+        type: string
+      dry_run:
+        description: "Simular sem publicar"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: marketing/automacao
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Criar .env a partir dos secrets
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          MEDIA_BASE_URL: ${{ secrets.MEDIA_BASE_URL }}
+          HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}
+          HEYGEN_AVATAR_ID: ${{ secrets.HEYGEN_AVATAR_ID }}
+          HEYGEN_VOICE_ID: ${{ secrets.HEYGEN_VOICE_ID }}
+          GITHUB_TOKEN: ${{ secrets.GH_ASSETS_TOKEN }}
+          GITHUB_REPO: ${{ secrets.GH_ASSETS_REPO }}
+        run: |
+          cat <<EOF > .env
+          IG_USER_ID=${IG_USER_ID}
+          META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+          MEDIA_BASE_URL=${MEDIA_BASE_URL}
+          CALENDAR_XLSX=../calendario-editorial-30-dias.xlsx
+          CREATIVES_DIR=../criativos
+          HEYGEN_API_KEY=${HEYGEN_API_KEY}
+          HEYGEN_AVATAR_ID=${HEYGEN_AVATAR_ID}
+          HEYGEN_VOICE_ID=${HEYGEN_VOICE_ID}
+          VIDEO_HOSTING=github
+          GITHUB_TOKEN=${GITHUB_TOKEN}
+          GITHUB_REPO=${GITHUB_REPO}
+          EOF
+
+      - name: Validar token Meta
+        run: python instagram_publisher.py check
+
+      - name: Rodar orchestrator
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.day }}" ]; then
+            ARGS="--day ${{ github.event.inputs.day }}"
+          else
+            ARGS="--today"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          python publish_orchestrator.py $ARGS
+
+      - name: Upload logs (se houver)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-logs-${{ github.run_id }}
+          path: marketing/automacao/publish_log.jsonl
+          if-no-files-found: ignore
+          retention-days: 90

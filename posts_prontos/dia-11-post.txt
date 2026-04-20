@@ -1,0 +1,44 @@
+DIA 11 — 01/05 08:30
+Formato: Post único
+Pilar: Carreira
+Ebook: Autoridade-Bastidores
+Criativo sugerido: Infográfico colorido com 7 fases numeradas
+
+==================================================
+TÍTULO: Roadmap DevOps 2026 (sem fluff, só o essencial)
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Se eu fosse começar em DevOps hoje, essa seria minha ordem:
+
+🟢 Fase 1 — Fundação (1-2 meses)
+Linux básico + Git + 1 linguagem (Python ou Node)
+
+🔵 Fase 2 — Containers (1 mês)
+Docker → Docker Compose → Kubernetes local (Kind)
+
+🟡 Fase 3 — Cloud (2 meses)
+AWS Free Tier: EC2, S3, VPC, IAM, RDS, ECS/EKS
+
+🟠 Fase 4 — IaC (1 mês)
+Terraform + módulos oficiais da AWS
+
+🔴 Fase 5 — CI/CD (1 mês)
+GitHub Actions → testes → build → deploy
+
+🟣 Fase 6 — Observabilidade (1 mês)
+Prometheus + Grafana + Loki
+
+⚫ Fase 7 — Segurança (contínuo)
+IAM least privilege + OWASP + Trivy scan
+
+TOTAL: ~8 meses estudando 1h/dia pra se tornar empregável como Junior.
+
+A Trilha DEVOPSRAIZ cobre tudo isso em 6 ebooks com projeto real de ponta a ponta.
+
+💬 Em qual fase você tá?
+
+✨ Comentar fase atual + seguir pra próximos posts
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #roadmapdevops #carreiratech

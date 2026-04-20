@@ -1,0 +1,25 @@
+DIA 21 — 11/05 19:00
+Formato: Reel (30s)
+Pilar: Autoridade
+Ebook: Autoridade-Bastidores
+Criativo sugerido: Reel com time-lapse de tela do VS Code + música
+
+==================================================
+TÍTULO: Time-lapse: montando a trilha DEVOPSRAIZ no VS Code
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+2 semanas comprimidas em 30 segundos.
+
+6 ebooks.
+6 projetos integrados.
+Do monorepo inicial ao deploy K8s com Prometheus, Grafana, IA conversacional e hardening de segurança.
+
+Tudo em português técnico de verdade (não é copy/paste do Medium).
+
+👉 Link da trilha na bio.
+
+✨ Seguir + curtir
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #devlife #coding

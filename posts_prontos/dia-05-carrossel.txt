@@ -1,0 +1,37 @@
+DIA 5 — 25/04 08:30
+Formato: Carrossel (6 slides)
+Pilar: Educacional
+Ebook: 4-IA-RAG-Agents
+Criativo sugerido: Diagrama RAG animado + exemplo real
+
+==================================================
+TÍTULO: RAG em 60 segundos: a técnica que faz sua IA parar de alucinar
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+RAG (Retrieval-Augmented Generation) é o motivo do ChatGPT Enterprise funcionar direito na sua empresa.
+
+Sem RAG:
+"Claude, quanto a gente gastou de AWS em março?"
+→ Resposta: "Desculpe, não tenho acesso aos seus dados."
+
+Com RAG:
+1. Pergunta vira um vetor (embedding)
+2. Busca vetorial encontra documentos similares
+3. LLM responde USANDO esses documentos como contexto
+4. Bonus: cita a fonte (página, data, autor)
+
+Stack real que você usa em produção:
+→ PostgreSQL + pgvector (grátis, roda no Docker)
+→ OpenAI text-embedding-3-small (USD 0.02 / 1M tokens)
+→ Claude 3.5 Sonnet para gerar resposta
+→ Chunking semântico + reranking
+
+Código completo passo a passo no Ebook 4 da Trilha.
+
+👉 Link na bio.
+
+✨ Salvar + comentar "RAG" pra eu mandar exemplo em TS
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #rag #ia #llm #langchain

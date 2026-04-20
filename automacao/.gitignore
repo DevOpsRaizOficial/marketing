@@ -1,0 +1,16 @@
+# Nunca comite credenciais
+.env
+.env.*
+!.env.example
+
+# Logs
+publish_log.jsonl
+publish.log
+*.log
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Vídeos temporários (são regenerados via HeyGen API)
+../videos_mp4/*.mp4

@@ -1,0 +1,35 @@
+DIA 1 — 21/04 19:00
+Formato: Carrossel (8 slides)
+Pilar: Autoridade
+Ebook: Autoridade-Bastidores
+Criativo sugerido: Foto do Tiago + 7 slides com capas dos ebooks da trilha
+
+==================================================
+TÍTULO: Quem sou eu e por que criei a Trilha DEVOPSRAIZ
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Muito prazer, eu sou o Tiago e acabei de lançar a Trilha DEVOPSRAIZ — 6 ebooks que levam você do ZERO à produção em Cloud Native, IA e DevOps.
+
+Por que isso importa?
+
+Porque 90% dos cursos de DevOps no Brasil ensinam conceitos soltos. Você aprende Docker aqui, Kubernetes ali, Terraform acolá — mas nunca monta um projeto COMPLETO, de ponta a ponta, do jeito que uma empresa de verdade usa.
+
+A Trilha DEVOPSRAIZ é diferente:
+→ Ebook 1: Plataforma Multi-Cloud com IA (FinOps)
+→ Ebook 2: Docker, Kubernetes e Terraform
+→ Ebook 3: De Projeto a SaaS (Multi-Tenant + Billing)
+→ Ebook 4: IA Avançada (RAG, Agents, LLMs)
+→ Ebook 5: Observabilidade e SRE
+→ Ebook 6: Segurança Cloud e Compliance
+
+Tudo integrado. Tudo com código funcional. Tudo em português.
+
+Me segue aqui que nos próximos 30 dias vou soltar muito conteúdo útil de verdade.
+
+👉 Link da trilha na bio.
+
+✨ Seguir o perfil + salvar o post
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #devopsraiz

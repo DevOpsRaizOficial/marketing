@@ -1,0 +1,27 @@
+DIA 6 — 26/04 20:00
+Formato: Post único (meme)
+Pilar: Autoridade
+Ebook: Autoridade-Bastidores
+Criativo sugerido: Meme clássico de programação adaptado para K8s
+
+==================================================
+TÍTULO: Meme: dev júnior vs cluster Kubernetes
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Todo dev júnior quando vê o primeiro kubectl describe pod e aparece:
+CrashLoopBackOff
+ImagePullBackOff
+OOMKilled
+Pending (Unschedulable)
+
+Calma que no Ebook 2 da Trilha DEVOPSRAIZ tem um capítulo inteiro só de troubleshooting com os top 5 erros mais comuns de cada tópico.
+
+😂 Quem já passou por isso levanta a mão.
+
+👉 Link na bio.
+
+✨ Reagir + comentar o erro que mais te torrou
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #kubernetesmeme #devlife

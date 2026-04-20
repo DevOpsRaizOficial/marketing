@@ -1,0 +1,31 @@
+REEL DIA 26 — DE PROJETO PESSOAL A SAAS EM 30 DIAS
+Duração-alvo: 55 a 65 segundos
+Formato: 9:16 vertical
+Avatar + Voice Clone Teste1
+===============================================
+
+[Hook de promessa]
+
+Quer transformar seu projeto de portfólio num SaaS vendendo de verdade? Esse é o roteiro que eu sigo.
+
+[Tom de lista, ritmo claro]
+
+Semana um... refatorar pra multi-tenant. Adicionar client I D em todas as tabelas. E um middleware Prisma que injeta esse client I D automaticamente.
+
+Semana dois... sistema de planos. Free, Pro, Business. Feature flags... rate limit por plano... e um banner de upgrade no frontend.
+
+Semana três... billing. Criar produto na Hotmart. Tratar os webhooks de compra aprovada, cancelamento e mudança de plano. E portal de assinatura.
+
+Semana quatro... lançamento. Landing page em Next.js com Vercel. Analytics com PostHog. E abrir pagamento em produção.
+
+[Pausa, direto ao ponto]
+
+Trinta dias. Um SaaS... pronto pra vender.
+
+[Fecho com prova]
+
+Esse roteiro completo... com código real de cada arquivo... tá no ebook três da Trilha DEVOPSRAIZ.
+
+Salva esse vídeo... e manda pro amigo dev que sempre fala que vai lançar um SaaS.
+
+Link na bio.

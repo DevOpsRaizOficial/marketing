@@ -1,0 +1,37 @@
+REEL DIA 9 — TERRAFORM EM 30 SEGUNDOS
+Duração-alvo: 35 a 45 segundos
+Formato: 9:16 vertical
+Avatar + Voice Clone Teste1
+===============================================
+
+[Fala rápida, energia alta]
+
+Terraform do zero até EKS no ar... em três arquivos. Bora.
+
+[Cada item numerado com pausa curta]
+
+Arquivo um... provider ponto tee efe... configura AWS.
+
+Arquivo dois... vê pê cê ponto tee efe... módulo VPC oficial.
+
+Arquivo três... eks ponto tee efe... módulo EKS oficial.
+
+[Ritmo mais intenso]
+
+Três comandos.
+
+Terraform init... baixa providers.
+
+Terraform plan... mostra o que vai criar.
+
+Terraform apply... sobe o cluster EKS em quinze minutos.
+
+[Pausa pra impacto]
+
+Pronto. Cluster Kubernetes gerenciado na AWS... rodando.
+
+[Fecho rápido com CTA]
+
+Detalhes completos, inclusive IRSA, autoscaler e ingress no ebook dois da Trilha DEVOPSRAIZ.
+
+Você usa Terraform, Pulumi ou CDK? Comenta.

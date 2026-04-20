@@ -1,0 +1,31 @@
+DIA 9 — 29/04 12:00
+Formato: Reel (30s)
+Pilar: Educacional
+Ebook: 2-Docker-K8s-Terraform
+Criativo sugerido: Reel com terminal acelerado + apply bem sucedido
+
+==================================================
+TÍTULO: Terraform em 30 segundos: do zero ao EKS no ar
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Infrastructure as Code em 3 arquivos:
+
+1. provider.tf — configura AWS
+2. vpc.tf — módulo VPC oficial
+3. eks.tf — módulo EKS oficial
+
+terraform init → baixa providers
+terraform plan → mostra o que vai criar
+terraform apply → sobe o cluster EKS
+
+Em 15 minutos você tem um cluster Kubernetes gerenciado rodando.
+
+Detalhes completos (inclusive como configurar IRSA, autoscaler, ingress) no Ebook 2 da Trilha DEVOPSRAIZ.
+
+💬 Você usa Terraform, Pulumi ou CDK? Comenta.
+
+✨ Comentar ferramenta preferida
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #terraform #iac #eks

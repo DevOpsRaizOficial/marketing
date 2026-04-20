@@ -1,0 +1,46 @@
+REEL DIA 3 — SALÁRIO DEVOPS EM 2026
+Duração-alvo: 55 a 65 segundos
+Formato: 9:16 vertical
+Avatar + Voice Clone Teste1
+===============================================
+
+[Hook forte, imediato]
+
+Quanto ganha um DevOps no Brasil em 2026? Vou te falar os números reais.
+
+[Lista pausada, tempo entre cada faixa pra legenda acompanhar]
+
+Junior... cinco mil e quinhentos a nove mil reais.
+
+Pleno... dez mil a dezesseis mil.
+
+Sênior... dezessete mil a vinte e oito mil reais.
+
+Staff ou Principal... vinte e oito mil a quarenta e cinco mil... pra cima.
+
+[Pausa, vira cabeça levemente]
+
+Agora, se você mirar em vagas remotas em dólar... pra LATAM... a faixa sobe feio. Sênior facilmente passa de doze mil dólares por mês.
+
+[Tom de virada, tom de conselho]
+
+A pergunta certa não é quanto você ganha hoje.
+
+É: o que destrava a virada de Junior pra Pleno?
+
+[Enumeração rápida, cada item forte]
+
+Saber ler erro em produção... observabilidade.
+Saber encontrar custo escondido na cloud... FinOps.
+Saber escrever Infraestrutura como Código... Terraform.
+E saber fazer hardening de Kubernetes... RBAC e Network Policies.
+
+[Fechamento com CTA]
+
+Esses quatro estão cobertos na Trilha DEVOPSRAIZ... nos ebooks um, dois, cinco e seis.
+
+[Olhar pra câmera]
+
+Em qual nível você tá hoje? Comenta aí em baixo.
+
+Link da trilha completa aqui na bio.

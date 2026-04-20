@@ -1,0 +1,41 @@
+DIA 10 — 30/04 19:00
+Formato: Carrossel (10 slides)
+Pilar: Educacional
+Ebook: 3-SaaS-MultiTenant
+Criativo sugerido: Carrossel roxo com 3 diagramas lado-a-lado
+
+==================================================
+TÍTULO: 3 estratégias de isolamento em SaaS Multi-Tenant (prós/contras)
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Você quer transformar seu projeto em SaaS. Primeira decisão técnica:
+COMO separar os dados dos clientes?
+
+1️⃣ Database per Tenant
+✅ Isolamento máximo (compliance, enterprise)
+❌ Custo altíssimo (N databases)
+❌ Migrations em N bancos
+
+2️⃣ Schema per Tenant
+✅ Isolamento bom, mesmo database
+✅ Backup por tenant
+❌ Schemas multiplicando
+❌ Conexões Prisma complicadas
+
+3️⃣ Row-Level Isolation (clientId em toda tabela)
+✅ MELHOR CUSTO
+✅ Escala pra milhões de tenants
+❌ Requer disciplina (middleware obrigatório)
+⚠️ Risco #1 da indústria: data leak entre tenants
+
+👉 90% dos SaaS do mercado usam opção 3 (inclusive o Slack, Notion, Figma).
+
+No Ebook 3 da Trilha eu mostro como implementar Row-Level Isolation em Prisma com middleware que INJETA o clientId automaticamente — impossível esquecer e vazar dados.
+
+👉 Link na bio.
+
+✨ Salvar + comentar qual estratégia você usa
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #saas #multitenant #nodejs

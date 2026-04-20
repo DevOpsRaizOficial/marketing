@@ -1,0 +1,45 @@
+DIA 16 — 06/05 13:00
+Formato: Reel (45s)
+Pilar: Educacional
+Ebook: 2-Docker-K8s-Terraform
+Criativo sugerido: Reel comparando tamanho de imagem lado a lado
+
+==================================================
+TÍTULO: Reduzi imagem Docker de 1.2GB pra 150MB (mesmo código)
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Segredo: multi-stage build.
+
+ANTES (errado):
+FROM node:20
+COPY . .
+RUN npm install
+RUN npm run build
+CMD ["node", "dist/index.js"]
+→ 1.2 GB (inclui source, node_modules dev, docs, etc)
+
+DEPOIS (correto):
+FROM node:20-alpine AS builder
+COPY . .
+RUN npm ci
+RUN npm run build
+
+FROM node:20-alpine AS production
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+CMD ["node", "dist/index.js"]
+→ 150 MB (só o necessário pra rodar)
+
+Benefício real:
+→ Deploy 8x mais rápido
+→ Imagem registry 8x mais barato
+→ Superfície de ataque 80% menor
+→ Pull no K8s mais rápido = escala mais rápida
+
+Ebook 2 da Trilha DEVOPSRAIZ tem Dockerfile otimizado pra Node.js, Python (FastAPI) e React (Nginx).
+
+✨ Salvar + mostra pro time que faz deploy
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #docker #multistage

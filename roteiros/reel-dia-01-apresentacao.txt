@@ -1,0 +1,39 @@
+REEL DIA 1 — APRESENTAÇÃO DA TRILHA DEVOPSRAIZ
+Duração-alvo: 80 a 90 segundos
+Formato: 9:16 vertical
+Avatar + Voice Clone Teste1
+===============================================
+
+[Início — tom convidativo, pausa curta após "prazer"]
+
+Muito prazer... eu sou o Tiago... e hoje eu lanço a Trilha DEVOPSRAIZ.
+
+[Pausa. Olhar direto pra câmera.]
+
+Seis ebooks... que levam você... do zero absoluto... à produção em Cloud Native, IA e DevOps.
+
+[Mudança de ritmo, mais firme]
+
+Por que isso importa?
+
+Porque noventa por cento dos cursos de DevOps no Brasil... ensinam conceitos soltos. Você aprende Docker aqui, Kubernetes ali, Terraform acolá... mas nunca monta um projeto completo, de ponta a ponta, do jeito que uma empresa de verdade usa.
+
+[Pausa]
+
+A Trilha DEVOPSRAIZ é diferente. Você começa construindo uma plataforma real de gestão multi-cloud... com inteligência artificial integrada... deploya ela em Kubernetes com Terraform... transforma em SaaS com billing automático via Hotmart... coloca RAG e agentes conversacionais... monitora com Prometheus e Grafana... e blinda contra OWASP e LGPD.
+
+[Tom de prova]
+
+Um único projeto... seis ebooks... cada capítulo construindo em cima do anterior.
+
+[Tom de autoridade calmo]
+
+Código completo. Sem reticências. Sem copy-paste de Medium. Tudo em português técnico de verdade.
+
+[CTA final, olhar e pausa forte]
+
+Se você quer parar de aprender em pedaços soltos... e finalmente ver como tudo se conecta na vida real... link da trilha aqui na bio.
+
+[Última pausa antes do final]
+
+Nos próximos 30 dias, vou soltar muito conteúdo útil aqui no Instagram. Me segue que você vai gostar. Até amanhã.

@@ -1,0 +1,37 @@
+DIA 3 — 23/04 12:30
+Formato: Reel (60s)
+Pilar: Carreira
+Ebook: Autoridade-Bastidores
+Criativo sugerido: Reel estilo 'texto animado' + gráfico de barras com faixas
+
+==================================================
+TÍTULO: Quanto ganha um DevOps Junior em 2026 (dados reais)
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Faixas salariais DevOps no Brasil em 2026 (Glassdoor + vagas reais):
+
+→ Junior: R$ 5.500 — R$ 9.000
+→ Pleno: R$ 10.000 — R$ 16.000
+→ Sênior: R$ 17.000 — R$ 28.000
+→ Staff/Principal: R$ 28.000 — R$ 45.000+
+
+Em dólar (vagas remotas LATAM):
+→ Junior: USD 1.500 — USD 3.000
+→ Pleno: USD 3.500 — USD 6.000
+→ Sênior: USD 7.000 — USD 12.000+
+
+O que destrava o salto de Junior para Pleno?
+1. Saber ler erro em produção (observabilidade)
+2. Saber encontrar custo escondido na cloud (FinOps)
+3. Saber escrever IaC decente (Terraform/Pulumi)
+4. Saber hardening básico de K8s (RBAC, Network Policies)
+
+Tudo isso está na Trilha DEVOPSRAIZ.
+
+💬 Qual nível você tá hoje? Comenta aí.
+
+✨ Comentar o nível de carreira + seguir perfil
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #salariotech #carreiradevops

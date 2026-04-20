@@ -1,0 +1,31 @@
+DIA 4 — 24/04 19:30
+Formato: Carrossel (10 slides)
+Pilar: Educacional
+Ebook: 1-MultiCloud-FinOps
+Criativo sugerido: Carrossel com screenshots de dashboards + dólar voando
+
+==================================================
+TÍTULO: Você tá QUEIMANDO dinheiro na AWS (e nem sabe)
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Gartner 2024: empresas desperdiçam em média 32% do orçamento de cloud por falta de visibilidade.
+
+Top 5 custos escondidos na AWS que eu já encontrei em auditoria:
+
+1. EBS volumes órfãos (instância foi deletada, disco ficou)
+2. Snapshots sem política de rotação (acumulando GB/mês)
+3. NAT Gateway em vez de VPC Endpoint (USD 32/mês + $0.045/GB)
+4. Load Balancer parado (sem target saudável, mas cobrando mensalidade)
+5. CloudWatch Logs sem retention (pode virar milhares de dólares)
+
+Como descobrir? Construa seu próprio painel de custos multi-cloud.
+
+No Ebook 1 da Trilha DEVOPSRAIZ eu mostro do zero como integrar AWS Cost Explorer + Azure Cost Management + GCP Billing + OCI num único painel Node.js + React, com IA analisando as anomalias.
+
+👉 Link na bio.
+
+✨ Salvar + marcar aquele amigo sysadmin
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #finops #aws #cloudcosts

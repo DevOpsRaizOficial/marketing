@@ -1,0 +1,28 @@
+DIA 18 — 08/05 08:30
+Formato: Post único (frase)
+Pilar: Carreira
+Ebook: Autoridade-Bastidores
+Criativo sugerido: Post texto centralizado em fundo escuro, destaque da frase
+
+==================================================
+TÍTULO: Frase: a diferença entre júnior e sênior em DevOps
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Junior: "funciona na minha máquina"
+Pleno: "funciona em staging"
+Sênior: "funciona em staging, tem métrica, tem alerta, tem runbook, tem rollback, tem teste de carga e não acorda ninguém às 3am."
+
+A diferença entre Junior e Sênior não é quantidade de stack. É maturidade operacional.
+
+→ Ebook 5 da Trilha é exatamente sobre essa maturidade.
+→ Ebook 6 é sobre dormir tranquilo em produção.
+
+👉 Link na bio.
+
+💬 Qual o seu mantra operacional?
+
+✨ Comentar mantra + compartilhar
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #seniordev #devopslife

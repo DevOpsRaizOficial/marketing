@@ -1,0 +1,35 @@
+DIA 2 — 22/04 08:00
+Formato: Carrossel (7 slides)
+Pilar: Educacional
+Ebook: 2-Docker-K8s-Terraform
+Criativo sugerido: Carrossel com ilustração casa/hotel + diagramas técnicos
+
+==================================================
+TÍTULO: Docker em 7 slides: VM vs Container (a analogia que destrava tudo)
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Se alguém te perguntar AGORA "qual a diferença entre VM e Container?", você sabe responder?
+
+Analogia que uso:
+VM = apartamento inteiro (paredes, hidráulica, tudo seu)
+Container = um quarto num hotel (compartilha infra, mas é isolado)
+
+No carrossel:
+→ Slide 2: Arquitetura visual VM vs Container
+→ Slide 3: Por que container é 100x mais leve
+→ Slide 4: Imagem vs Container (o erro que todo iniciante comete)
+→ Slide 5: Comandos que você vai usar 90% do tempo
+→ Slide 6: Dockerfile em 10 linhas que já roda uma API Node.js
+→ Slide 7: O próximo passo (Docker Compose + K8s)
+
+💾 Salva esse post pra não perder.
+
+Esse é um recorte do Ebook 2 da Trilha DEVOPSRAIZ — que cobre Docker, Kubernetes e Terraform do zero à produção.
+
+👉 Link completo na bio.
+
+✨ Salvar + comentar "docker" que mando o PDF grátis do capítulo 1
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #docker #containers

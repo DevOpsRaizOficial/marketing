@@ -1,0 +1,22 @@
+DIA 12 — 02/05 20:00
+Formato: Story destaque (5 stories)
+Pilar: Autoridade
+Ebook: Autoridade-Bastidores
+Criativo sugerido: Stories com mix de fotos, enquetes e CTAs
+
+==================================================
+TÍTULO: Bastidores: construindo a Trilha DEVOPSRAIZ
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Stories:
+1. Foto do setup (monitor duplo, código rodando)
+2. Print do VS Code com schema.prisma do ebook 3
+3. Enquete: "Qual ebook você leria primeiro?" (6 opções)
+4. Vídeo curto: 'esse trecho me tomou 3 dias'
+5. CTA: 'link na bio pra ver todos os 6 ebooks'
+
+✨ Responder enquete + clicar no link
+
+stories não aceitam hashtags públicas

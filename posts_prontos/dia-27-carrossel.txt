@@ -1,0 +1,48 @@
+DIA 27 — 17/05 08:00
+Formato: Carrossel (5 slides)
+Pilar: Educacional
+Ebook: 6-Seguranca-LGPD
+Criativo sugerido: Carrossel com checklist visual vermelho
+
+==================================================
+TÍTULO: LGPD sem drama: checklist que todo backend precisa
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+LGPD não é só "botar banner de cookie". Tem código envolvido.
+
+Checklist técnico:
+
+1️⃣ Dados pessoais encriptados em REPOUSO
+→ AES-256-GCM no banco
+→ Chave no AWS KMS / Azure Key Vault
+
+2️⃣ Dados pessoais encriptados em TRÂNSITO
+→ TLS 1.3 obrigatório
+→ HSTS + certificate pinning
+
+3️⃣ Logs SEM PII
+→ Não logar CPF, email, senha
+→ Mask no logger: "user@***.com"
+
+4️⃣ Direito ao esquecimento
+→ Endpoint DELETE /users/me
+→ Soft delete + purge job em 30 dias
+
+5️⃣ Portabilidade de dados
+→ Endpoint GET /users/me/export (JSON)
+
+6️⃣ Auditoria
+→ AuditLog table: quem acessou o quê, quando
+
+7️⃣ Consentimento granular
+→ Cada finalidade = 1 flag (email mkt, analytics, etc)
+
+Ebook 6 da Trilha DEVOPSRAIZ implementa tudo isso em Node.js.
+
+👉 Link na bio.
+
+✨ Salvar + marcar DPO/jurídico
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #lgpd #privacidade #compliance

@@ -1,0 +1,38 @@
+DIA 22 — 12/05 08:00
+Formato: Carrossel (8 slides)
+Pilar: Educacional
+Ebook: 3-SaaS-MultiTenant
+Criativo sugerido: Carrossel roxo com fluxo de checkout animado
+
+==================================================
+TÍTULO: Como integrar Hotmart no seu SaaS (webhook + upgrade automático)
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Você quer cobrar seus clientes de forma recorrente. No Brasil, Hotmart é o padrão.
+
+Fluxo completo que eu montei no Ebook 3:
+
+1. Usuário clica "Upgrade para Professional"
+2. Backend gera URL: pay.hotmart.com/<PRODUCT>?off=<PLAN>&src=<clientId|plan>
+3. Redireciona pro checkout Hotmart
+4. Usuário paga
+5. Hotmart envia webhook PURCHASE_APPROVED
+6. Backend valida HOTTOK, ativa plano no banco
+7. Frontend detecta via JWT refresh e desbloqueia features
+
+Webhooks que você TEM que tratar:
+→ PURCHASE_APPROVED → ativar plano
+→ PURCHASE_CANCELED/REFUNDED → downgrade pra FREE
+→ SUBSCRIPTION_CANCELLATION → downgrade
+→ SUBSCRIPTION_PLAN_CHANGE → alterar plano
+→ PURCHASE_DELAYED → marcar PAST_DUE
+
+Implementação completa (billing.service.ts + hotmartWebhook.controller.ts) no Ebook 3 da Trilha.
+
+👉 Link na bio.
+
+✨ Salvar + compartilhar com empreendedor tech
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #saas #hotmart #billing

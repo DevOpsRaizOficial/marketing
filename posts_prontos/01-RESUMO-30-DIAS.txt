@@ -1,0 +1,33 @@
+CALENDÁRIO DEVOPSRAIZ — visão rápida
+======================================================================
+
+Dia  1  21/04  19:00   Carrossel (8 slides)    Quem sou eu e por que criei a Trilha DEVOPSRAIZ
+Dia  2  22/04  08:00   Carrossel (7 slides)    Docker em 7 slides: VM vs Container (a analogia que destrava tudo)
+Dia  3  23/04  12:30   Reel (60s)              Quanto ganha um DevOps Junior em 2026 (dados reais)
+Dia  4  24/04  19:30   Carrossel (10 slides)   Você tá QUEIMANDO dinheiro na AWS (e nem sabe)
+Dia  5  25/04  08:30   Carrossel (6 slides)    RAG em 60 segundos: a técnica que faz sua IA parar de alucinar
+Dia  6  26/04  20:00   Post único (meme)       Meme: dev júnior vs cluster Kubernetes
+Dia  7  27/04  11:00   Carrossel (8 slides)    Monitoramento vs Observabilidade: pare de confundir
+Dia  8  28/04  08:00   Carrossel (7 slides)    OWASP Top 10: os 10 ataques que vão testar sua aplicação essa semana
+Dia  9  29/04  12:00   Reel (30s)              Terraform em 30 segundos: do zero ao EKS no ar
+Dia 10  30/04  19:00   Carrossel (10 slides)   3 estratégias de isolamento em SaaS Multi-Tenant (prós/contras)
+Dia 11  01/05  08:30   Post único              Roadmap DevOps 2026 (sem fluff, só o essencial)
+Dia 12  02/05  20:00   Story destaque (5 stories)  Bastidores: construindo a Trilha DEVOPSRAIZ
+Dia 13  03/05  19:00   Carrossel (8 slides)    Function Calling: sua IA deixa de ser chatbot e vira agente
+Dia 14  04/05  10:00   Carrossel (6 slides)    Trilha DEVOPSRAIZ completa por menos de um almoço por mês
+Dia 15  05/05  08:00   Carrossel (7 slides)    SLO, SLI e Error Budget: a matemática da confiabilidade
+Dia 16  06/05  13:00   Reel (45s)              Reduzi imagem Docker de 1.2GB pra 150MB (mesmo código)
+Dia 17  07/05  19:30   Carrossel (9 slides)    Arquitetura: plataforma FinOps Multi-Cloud do zero
+Dia 18  08/05  08:30   Post único (frase)      Frase: a diferença entre júnior e sênior em DevOps
+Dia 19  09/05  20:00   Carrossel (8 slides)    Zero Trust na prática: 7 princípios que toda app precisa
+Dia 20  10/05  12:30   Carrossel (6 slides)    Quanto CUSTA rodar IA em produção? Planilha com números reais
+Dia 21  11/05  19:00   Reel (30s)              Time-lapse: montando a trilha DEVOPSRAIZ no VS Code
+Dia 22  12/05  08:00   Carrossel (8 slides)    Como integrar Hotmart no seu SaaS (webhook + upgrade automático)
+Dia 23  13/05  13:00   Post único              Checklist: 10 skills pra virar DevOps Pleno em 2026
+Dia 24  14/05  20:00   Carrossel (7 slides)    Alerta bom vs alerta RUIM: pare de acordar seu time à toa
+Dia 25  15/05  11:00   Carrossel (6 slides)    5 queries SQL que me economizam 30% na AWS todo mês
+Dia 26  16/05  19:30   Reel (60s)              De projeto pessoal a SaaS vendendo em 30 dias (roteiro)
+Dia 27  17/05  08:00   Carrossel (5 slides)    LGPD sem drama: checklist que todo backend precisa
+Dia 28  18/05  12:00   Post único (testemunho)  Por que eu criei uma Trilha em vez de um curso em vídeo
+Dia 29  19/05  19:00   Carrossel (10 slides)   Prompt Engineering avançado: 5 níveis que todo dev precisa dominar
+Dia 30  20/05  20:00   Carrossel (10 slides)   Fechamento de mês: a Trilha DEVOPSRAIZ completa

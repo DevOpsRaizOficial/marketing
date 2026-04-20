@@ -1,0 +1,32 @@
+DIA 23 — 13/05 13:00
+Formato: Post único
+Pilar: Carreira
+Ebook: Autoridade-Bastidores
+Criativo sugerido: Checklist visual com caixas pra marcar
+
+==================================================
+TÍTULO: Checklist: 10 skills pra virar DevOps Pleno em 2026
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Se você marcar 7/10, já tá pronto pra pleito:
+
+☐ Docker + Compose + Dockerfile otimizado
+☐ Kubernetes (kubectl, helm, deployments, services, ingress)
+☐ Terraform (providers, modules, state remoto)
+☐ Cloud principal (AWS OU Azure OU GCP fluente)
+☐ CI/CD (GitHub Actions ou GitLab CI)
+☐ Observabilidade (Prometheus + Grafana + Loki)
+☐ Linguagem de scripting (Python ou Go)
+☐ Linux + Bash + networking básico (DNS, HTTP, TLS)
+☐ Segurança básica (IAM, secrets management, OWASP)
+☐ Soft skill: escrever runbook e incidente post-mortem
+
+Todos esses 10 estão cobertos na Trilha DEVOPSRAIZ.
+
+💬 Quantos check você tem hoje?
+
+✨ Comentar número de checks + compartilhar com colega
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #devopsskills #plenodev

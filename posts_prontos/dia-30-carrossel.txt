@@ -1,0 +1,46 @@
+DIA 30 — 20/05 20:00
+Formato: Carrossel (10 slides)
+Pilar: Venda
+Ebook: Venda-Direta
+Criativo sugerido: Mockup premium dos 6 ebooks + CTA
+
+==================================================
+TÍTULO: Fechamento de mês: a Trilha DEVOPSRAIZ completa
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+30 dias falando de DevOps, Cloud, IA, Segurança, SRE e SaaS aqui no Insta.
+
+Se você chegou até aqui, provavelmente tá pensando:
+"Tá, mas como eu aprendo TUDO isso de forma estruturada?"
+
+Resposta: Trilha DEVOPSRAIZ.
+
+6 ebooks, 6 projetos que se conectam, 1 história contínua:
+
+📘 Ebook 1 — Você constrói uma plataforma FinOps Multi-Cloud com IA
+📗 Ebook 2 — Você faz deploy dela em K8s com Terraform
+📕 Ebook 3 — Você transforma em SaaS com multi-tenant e billing
+📘 Ebook 4 — Você adiciona RAG + Agents pra IA conversacional
+📙 Ebook 5 — Você monitora tudo com SRE practices (99.99% uptime)
+📗 Ebook 6 — Você blinda contra OWASP e implementa LGPD
+
+O que você sai sabendo:
+✅ Node.js + TypeScript + React em nível profissional
+✅ Docker, Kubernetes, Terraform
+✅ AWS, Azure, GCP, OCI (adaptadores)
+✅ OpenAI + Anthropic + LangChain
+✅ Prometheus, Grafana, Loki
+✅ Prisma, PostgreSQL, pgvector
+✅ Multi-tenant, Hotmart billing, Stripe alternativo
+
+🎁 Lançamento: código na comunidade pra você pegar o fonte completo.
+
+👉 Link na bio.
+
+Se ficar com dúvida, manda DM. Eu respondo pessoalmente.
+
+✨ Clicar link + comentar dúvida
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #devopsraiz #lancamento

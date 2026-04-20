@@ -1,0 +1,57 @@
+STORIES CURTOS — 15 SEGUNDOS CADA
+Formato: 9:16 vertical
+Avatar + Voice Clone Teste1
+
+Grave de 5 a 10 stories. Use conforme o calendário do mês. Cada bloco
+abaixo é um story independente. Publique 2-3 por dia misturado com os
+stories naturais (foto do setup, enquetes, etc).
+
+===============================================
+STORY 01 — Hook para o post do dia 2 (Docker)
+===============================================
+Post novo no feed... VM versus Container na analogia que destrava tudo. Sete slides com código pronto. Tá um carrossel bom de salvar. Vai lá.
+
+===============================================
+STORY 02 — Hook para o post do dia 4 (AWS custos)
+===============================================
+Trinta e dois por cento. Esse é o número que a Gartner publicou... do desperdício médio em cloud. Fiz um carrossel mostrando os cinco custos escondidos que mais aparecem em auditoria. Passa lá no feed agora.
+
+===============================================
+STORY 03 — Hook para post do dia 8 (OWASP)
+===============================================
+OWASP Top Dez no feed. Os dez ataques que toda aplicação em produção vai sofrer, mais cedo ou mais tarde. Carrossel com como detectar e como prevenir cada um. Salva pra revisar em PR.
+
+===============================================
+STORY 04 — Conteúdo puro, ensinável em 15s
+===============================================
+Dica rápida. Se você usa Docker Compose em dev... e Kubernetes em produção... cuidado. Environment variables diferentes em cada ambiente é a maior fonte de bug que entra em produção sem aviso. Use dotenv ponto exemplo no git e nunca rode com valores hardcoded.
+
+===============================================
+STORY 05 — Conteúdo puro, provocação
+===============================================
+Pergunta rápida. Se CPU a noventa por cento te acorda às três da manhã... você tá alertando errado. Alerta bom é sobre sintoma, não causa. Latência alta, taxa de erro, error budget... isso é o que importa pro usuário.
+
+===============================================
+STORY 06 — CTA pro lead magnet (se lançar um)
+===============================================
+Fiz um PDF de amostra do ebook dois da Trilha DEVOPSRAIZ. Capítulo um completo... grátis. Comenta a palavra Docker no último post que eu te mando no direct.
+
+===============================================
+STORY 07 — Bastidor, humanização
+===============================================
+Setup de trabalho de hoje. Monitor duplo, café, VS Code com a planilha FinOps que tá no ebook um. Dia inteiro escrevendo o módulo de inteligência artificial do ebook quatro. Trabalho que dá prazer.
+
+===============================================
+STORY 08 — CTA de venda direta (usar com parcimônia)
+===============================================
+Última chance do cupom de lançamento da Trilha DEVOPSRAIZ. Seis ebooks, código completo de um projeto real. Link aqui no sticker que tá em cima... vai pro checkout direto.
+
+===============================================
+STORY 09 — Depoimento (use quando tiver primeiro comprador)
+===============================================
+Acabou de chegar no direct. Comprador do ebook dois me falando que em duas horas já subiu um cluster EKS inteiro com o Terraform do livro. Esse tipo de feedback... faz valer o tempo que eu coloquei na trilha.
+
+===============================================
+STORY 10 — Chamada pra newsletter (lead magnet alternativo)
+===============================================
+Link na bio... tem o endereço pra se inscrever na newsletter semanal. Conteúdo técnico que não cabe no post. Zero spam... só material útil. Entra lá.

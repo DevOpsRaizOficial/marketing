@@ -1,0 +1,43 @@
+DIA 19 — 09/05 20:00
+Formato: Carrossel (8 slides)
+Pilar: Educacional
+Ebook: 6-Seguranca-LGPD
+Criativo sugerido: Carrossel vermelho com 7 princípios numerados
+
+==================================================
+TÍTULO: Zero Trust na prática: 7 princípios que toda app precisa
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Zero Trust = "nunca confie, sempre verifique".
+
+O modelo antigo (castelo + muralha) morreu em 2020.
+
+Princípios que aplico em TODO projeto novo:
+
+1️⃣ Identidade forte (MFA obrigatório)
+2️⃣ Least privilege (IAM mínimo necessário)
+3️⃣ Microsegmentação (Network Policies no K8s)
+4️⃣ Assumir breach (logs, audit, detecção)
+5️⃣ Verificação contínua (não só no login)
+6️⃣ Encrypt everything (em trânsito E em repouso)
+7️⃣ Contexto (device, localização, comportamento)
+
+Ferramentas que uso:
+→ AWS: IAM Identity Center, GuardDuty, Config, CloudTrail
+→ Azure: Conditional Access, Defender, Key Vault
+→ K8s: OPA/Gatekeeper, Pod Security Standards, External Secrets
+→ App: JWT short-lived + refresh rotation, RBAC granular
+
+Ebook 6 da Trilha tem:
+✅ IAM Policies completas para cost explorer read-only
+✅ NetworkPolicy "deny all + allow list"
+✅ External Secrets Operator + Azure Key Vault
+✅ Admission controller bloqueando imagem com CVE
+
+👉 Link na bio.
+
+✨ Salvar + marcar CISO do seu time
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #zerotrust #cloudsecurity #lgpd

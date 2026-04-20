@@ -1,0 +1,47 @@
+DIA 29 — 19/05 19:00
+Formato: Carrossel (10 slides)
+Pilar: Educacional
+Ebook: 4-IA-RAG-Agents
+Criativo sugerido: Carrossel verde com 5 níveis escalonados
+
+==================================================
+TÍTULO: Prompt Engineering avançado: 5 níveis que todo dev precisa dominar
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Nível 1 — Zero-shot
+"Analise esses custos"
+→ funciona, mas genérico
+
+Nível 2 — Few-shot
+"Analise esses custos. Exemplo de análise boa: [exemplo 1] [exemplo 2]"
+→ qualidade sobe 40%
+
+Nível 3 — Chain-of-thought
+"Analise esses custos. Pense passo a passo:
+1. Identifique serviços com maior variação
+2. Compare com mês anterior
+3. Sugira ações"
+→ raciocínio estruturado
+
+Nível 4 — System prompts + structured output
+System: "Você é um FinOps analyst sênior..."
+User: [dados]
+Response format: JSON { issues, recommendations, priority }
+
+Nível 5 — Meta-prompts
+Prompt que GERA prompts otimizados pra cada caso.
+
+Técnicas avançadas (Ebook 4):
+→ Role prompting
+→ Self-consistency (voto majoritário)
+→ Constitutional AI (auto-crítica)
+
+Gemini vs GPT vs Claude cada um prefere formatação diferente. Isso também tá no ebook.
+
+👉 Link na bio.
+
+✨ Salvar + comentar qual nível você tá
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #promptengineering #ia

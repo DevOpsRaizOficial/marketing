@@ -1,0 +1,40 @@
+DIA 8 — 28/04 08:00
+Formato: Carrossel (7 slides)
+Pilar: Educacional
+Ebook: 6-Seguranca-LGPD
+Criativo sugerido: Carrossel vermelho com cada OWASP numerado
+
+==================================================
+TÍTULO: OWASP Top 10: os 10 ataques que vão testar sua aplicação essa semana
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Toda aplicação em produção na internet sofre esses ataques. É só questão de quando você vai descobrir.
+
+OWASP Top 10 (2021):
+
+A01 — Broken Access Control (IDOR)
+A02 — Cryptographic Failures
+A03 — Injection (SQL, NoSQL, Command)
+A04 — Insecure Design
+A05 — Security Misconfiguration
+A06 — Vulnerable Components
+A07 — Auth Failures
+A08 — Data Integrity Failures
+A09 — Logging Failures
+A10 — SSRF
+
+No Ebook 6 da Trilha DEVOPSRAIZ eu mostro CADA um:
+✅ Como o ataque funciona (código do atacante)
+✅ Como detectar no seu código
+✅ Como prevenir (código defensivo)
+✅ Como testar (ferramenta automatizada)
+
+💾 Salva pra quando for revisar código em PR.
+
+👉 Link na bio.
+
+✨ Salvar + comentar qual OWASP você já sofreu
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #owasp #security #devsecops #appsec

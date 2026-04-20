@@ -1,0 +1,39 @@
+DIA 26 — 16/05 19:30
+Formato: Reel (60s)
+Pilar: Educacional
+Ebook: 3-SaaS-MultiTenant
+Criativo sugerido: Reel com timeline 4 semanas + marcos
+
+==================================================
+TÍTULO: De projeto pessoal a SaaS vendendo em 30 dias (roteiro)
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Roteiro que eu sigo pra transformar side project em SaaS:
+
+Semana 1: refatorar pra multi-tenant
+→ Adicionar clientId em todas as tabelas
+→ Middleware Prisma de isolamento
+→ Seed de 3 tenants de exemplo
+
+Semana 2: sistema de planos
+→ FREE, PRO, BUSINESS com feature flags
+→ Rate limit por plano
+→ UpgradeBanner no frontend
+
+Semana 3: billing
+→ Criar produto na Hotmart
+→ Webhooks PURCHASE_APPROVED / CANCELED
+→ Portal de assinatura
+
+Semana 4: lançamento
+→ Landing page (Next.js + Vercel)
+→ Analytics (PostHog)
+→ Stripe/Hotmart em produção
+
+Ebook 3 da Trilha tem código completo de TUDO isso.
+
+✨ Salvar + seguir
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #indiehacker #saas

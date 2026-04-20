@@ -1,0 +1,25 @@
+# Tokens/segredos — NUNCA comite
+automacao/.env
+automacao/.env.*
+!automacao/.env.example
+automacao/publish_log.jsonl
+automacao/publish.log
+automacao/token_short.txt
+**/__pycache__/
+*.pyc
+
+# Arquivos temporários de LibreOffice/Office
+.~lock.*
+~$*
+
+# Pastas de vídeos gerados (muito grandes, hospedamos no release)
+videos_mp4/*.mp4
+!videos_mp4/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/

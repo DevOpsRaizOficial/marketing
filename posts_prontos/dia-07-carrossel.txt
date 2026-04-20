@@ -1,0 +1,40 @@
+DIA 7 — 27/04 11:00
+Formato: Carrossel (8 slides)
+Pilar: Educacional
+Ebook: 5-Observabilidade-SRE
+Criativo sugerido: Carrossel com 3 pilares ilustrados + screenshot Grafana
+
+==================================================
+TÍTULO: Monitoramento vs Observabilidade: pare de confundir
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Monitoramento clássico: "o servidor tá UP?" (Nagios, Zabbix)
+Observabilidade moderna: "por que o request do user X levou 5s no endpoint Y?"
+
+Os 3 pilares que você PRECISA dominar:
+
+🔢 Métricas (Prometheus)
+Números ao longo do tempo: latência, CPU, requests/s
+
+📝 Logs (Loki)
+Eventos textuais: "error no handler X", "query lenta"
+
+🔍 Traces (Jaeger/Tempo)
+Jornada de 1 request através de N microsserviços
+
+Exemplo real de investigação:
+User reporta: "tá lento"
+→ METRICAS: P99 latência subiu de 200ms pra 3s às 14:32
+→ LOGS: às 14:32 apareceu "slow query: SELECT * FROM costs WHERE..." (2.8s)
+→ TRACES: Request ID abc123 passou 2.8s em "DB Query"
+→ Causa raiz: full table scan por falta de índice
+
+💡 No Ebook 5 eu monto isso do zero em K8s.
+
+👉 Link na bio.
+
+✨ Salvar + marcar colega SRE
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #sre #observability #prometheus #grafana

@@ -1,0 +1,36 @@
+DIA 14 — 04/05 10:00
+Formato: Carrossel (6 slides)
+Pilar: Venda
+Ebook: Venda-Direta
+Criativo sugerido: Mockup das 6 capas dos ebooks em perspectiva 3D
+
+==================================================
+TÍTULO: Trilha DEVOPSRAIZ completa por menos de um almoço por mês
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Você pode aprender tudo isso GRÁTIS no Google. Vai demorar 3 anos fuçando blog por blog.
+
+Ou pode ter 6 ebooks ESTRUTURADOS em ordem, com projeto que conecta do ebook 1 ao 6.
+
+Trilha DEVOPSRAIZ — 6 volumes:
+📘 Ebook 1: Plataforma Multi-Cloud com IA (FinOps)
+📗 Ebook 2: Docker, Kubernetes e Terraform
+📕 Ebook 3: De Projeto a SaaS (Multi-Tenant + Billing)
+📘 Ebook 4: IA Avançada (RAG, Agents, LLMs)
+📙 Ebook 5: Observabilidade e SRE
+📗 Ebook 6: Segurança Cloud e Compliance (LGPD, Zero Trust)
+
+✅ Código completo (sem "...")
+✅ Projetos reais que você põe no portfólio
+✅ Português sem copy/paste do Medium
+✅ Em PDF, baixa e estuda offline
+
+👉 Link na bio. Hotmart com 7 dias de garantia.
+
+🎁 Comenta "QUERO" que mando um capítulo de amostra.
+
+✨ Comentar "QUERO" + clicar link
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #devopsraiz #cloudbrasil

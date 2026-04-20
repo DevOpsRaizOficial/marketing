@@ -1,0 +1,49 @@
+DIA 24 — 14/05 20:00
+Formato: Carrossel (7 slides)
+Pilar: Educacional
+Ebook: 5-Observabilidade-SRE
+Criativo sugerido: Carrossel com exemplo de alerta bom x ruim
+
+==================================================
+TÍTULO: Alerta bom vs alerta RUIM: pare de acordar seu time à toa
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+ERRADO: alertar sobre CAUSAS
+"CPU acima de 80%"
+"Memória acima de 90%"
+"Pod reiniciou"
+
+CERTO: alertar sobre SINTOMAS (impacto no usuário)
+"P95 latência acima de 500ms por 5 minutos"
+"Taxa de erro HTTP 5xx acima de 1% por 5 minutos"
+"Error budget consumido acima de 50%"
+
+Por quê?
+CPU a 90% pode ser normal pra batch. Memória a 90% pode ser cache saudável.
+O que importa é: o USUÁRIO tá sofrendo?
+
+Alertas que todo SRE junior precisa configurar:
+1. Alta latência P95 > 500ms
+2. Taxa de erro 5xx > 1%
+3. Pod restarts > 3 em 10min (indica bug)
+4. Disco > 80%
+5. Certificado SSL expirando em < 14 dias
+6. Database connections > 80% do pool
+7. Error budget consumido > 50%
+8. Custo diário de IA acima do threshold (💰)
+
+E CADA alerta DEVE ter runbook linkado — 1 página com:
+✅ O que significa
+✅ Como diagnosticar
+✅ Como mitigar
+✅ Quem escalar
+
+Ebook 5 da Trilha DEVOPSRAIZ tem alerting-rules.yaml completo.
+
+👉 Link na bio.
+
+✨ Salvar + marcar quem faz plantão no seu time
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #sre #alerting #oncall

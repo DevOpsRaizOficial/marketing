@@ -1,0 +1,39 @@
+REEL DIA 16 — DE 1.2GB PARA 150MB
+Duração-alvo: 50 a 60 segundos
+Formato: 9:16 vertical
+Avatar + Voice Clone Teste1
+===============================================
+
+[Hook visual, provocativo]
+
+Sua imagem Docker tá com quase dois gigabytes? Eu reduzo pra cento e cinquenta megabytes... sem tocar no seu código.
+
+[Tom didático, explicativo]
+
+O segredo... se chama multi-stage build.
+
+Na versão errada... você faz FROM node vinte... copia tudo... roda npm install... e já era. A imagem final leva o source, o node modules de desenvolvimento, os testes, até documentação.
+
+[Pausa]
+
+No multi-stage correto... você tem um estágio builder que compila tudo. E um estágio final, de produção... que só copia o que importa pra rodar.
+
+[Tom de resultado]
+
+Benefícios reais.
+
+Deploy oito vezes mais rápido.
+
+Registry oitenta por cento mais barato.
+
+Superfície de ataque oitenta por cento menor.
+
+E pull no Kubernetes... também mais rápido. O que significa... autoscaling mais rápido.
+
+[Fecho]
+
+No ebook dois da Trilha eu mostro o Dockerfile otimizado pra Node, pra Python com FastAPI, e pra React com Nginx.
+
+Salva esse vídeo... e manda pro time que faz deploy.
+
+Link da trilha na bio.

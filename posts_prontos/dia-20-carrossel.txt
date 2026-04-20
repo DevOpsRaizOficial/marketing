@@ -1,0 +1,39 @@
+DIA 20 — 10/05 12:30
+Formato: Carrossel (6 slides)
+Pilar: Educacional
+Ebook: 4-IA-RAG-Agents
+Criativo sugerido: Carrossel com gráfico de custo + tabela de modelos
+
+==================================================
+TÍTULO: Quanto CUSTA rodar IA em produção? Planilha com números reais
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Todo mundo fala em IA mas ninguém mostra a conta. Vou mostrar.
+
+App exemplo: chatbot de suporte com RAG, 10.000 usuários/mês, 5 mensagens cada.
+
+Custo por modelo (valores reais 2025):
+→ GPT-4o-mini: USD 0.15 / 1M tokens input
+→ Claude 3.5 Sonnet: USD 3.00 / 1M tokens input
+→ GPT-4 Turbo: USD 10.00 / 1M tokens input
+→ Claude 3 Opus: USD 15.00 / 1M tokens input
+
+Embeddings (RAG):
+→ OpenAI text-embedding-3-small: USD 0.02 / 1M tokens
+
+Conta real (50.000 mensagens/mês, 2k tokens contexto médio):
+→ Embeddings: 100M tokens * 0.02 = USD 2
+→ GPT-4o-mini: 100M * 0.15 + 50M * 0.60 = USD 45
+TOTAL: ~USD 47/mês rodando com 10k usuários
+
+Com Claude Sonnet: ~USD 450/mês (10x mais caro, mas melhor qualidade em raciocínio)
+
+📊 No Ebook 4 tem planilha Excel pronta pra você simular seu caso.
+
+👉 Link na bio.
+
+✨ Salvar + comentar caso de uso de IA que você tem
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #aicost #openai #anthropic

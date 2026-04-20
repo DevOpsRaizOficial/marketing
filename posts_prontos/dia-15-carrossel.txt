@@ -1,0 +1,41 @@
+DIA 15 — 05/05 08:00
+Formato: Carrossel (7 slides)
+Pilar: Educacional
+Ebook: 5-Observabilidade-SRE
+Criativo sugerido: Carrossel amarelo com tabela de uptime + gráfico error budget
+
+==================================================
+TÍTULO: SLO, SLI e Error Budget: a matemática da confiabilidade
+==================================================
+
+LEGENDA (copia tudo abaixo):
+
+Se você vai trabalhar com SRE, esses 3 conceitos mudam tudo:
+
+📊 SLI (Service Level Indicator)
+Métrica que MEDE confiabilidade.
+Ex: "% requests com status < 500"
+
+🎯 SLO (Service Level Objective)
+META para o SLI.
+Ex: "99.9% dos requests em < 200ms"
+
+💰 Error Budget
+Quanto PODE falhar sem violar o SLO.
+
+Tabela de uptime realista:
+99% → 7.3 horas de downtime/mês (Generoso)
+99.9% → 43 min (Moderado) ← seu primeiro alvo
+99.95% → 21 min (Apertado)
+99.99% → 4 min (Muito raro)
+99.999% → 26 seg (Quase impossível)
+
+📌 Regra: não existe "100% de uptime". Alvos irreais queimam o time.
+
+📌 Regra: Error Budget esgotou? FEATURE FREEZE. Foca só em reliability até restaurar.
+
+💡 Ebook 5 da Trilha tem implementação completa em Prometheus.
+
+✨ Salvar + comentar qual SLO faz sentido pra sua app
+
+#devops #cloud #aws #azure #gcp #kubernetes #docker #terraform #sre #devsecops #programacao #desenvolvimento #techbrasil #devbrasil #carreiratech #sre #slo #reliability

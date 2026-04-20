@@ -1,0 +1,29 @@
+REEL DIA 21 — TIME-LAPSE / BASTIDORES
+Duração-alvo: 25 a 35 segundos
+Formato: 9:16 vertical
+Avatar + Voice Clone Teste1
+Obs: este vídeo vai por cima de um time-lapse gravado por você
+do VS Code. A fala aqui é a narração que fica como voz em off.
+===============================================
+
+[Tom de bastidor, mais calmo]
+
+Duas semanas... comprimidas em trinta segundos.
+
+Seis ebooks.
+
+Seis projetos integrados.
+
+Desde o monorepo inicial... até deploy em Kubernetes...
+
+Com Prometheus, Grafana... inteligência artificial conversacional... e hardening de segurança.
+
+[Pausa]
+
+Tudo em português técnico real. Sem copy-paste de Medium.
+
+[Fechamento direto]
+
+Link da Trilha DEVOPSRAIZ na bio.
+
+Me segue aqui pra mais bastidor.
