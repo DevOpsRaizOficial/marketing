@@ -1,0 +1,84 @@
+name: Publicar Reel específico (one-shot)
+
+# Publica UM Reel específico no Instagram.
+# Usado pra publicar o Reel de apresentação (Dia 1) fora do calendário,
+# ou qualquer outro Reel extra/avulso.
+#
+# Tem também um cron único programado pra:
+#   - 22:00 UTC em 21/04/2026 → 19:00 BRT de hoje, Reel Dia 1
+
+on:
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "Número do dia do REEL_MAP (1, 3, 9, 16, 21, 26)"
+        required: true
+        default: "1"
+  schedule:
+    # 22:00 UTC 21 Abril = 19:00 BRT (data única, hoje)
+    - cron: "0 22 21 4 *"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: automacao
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Criar .env a partir dos secrets
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          MEDIA_BASE_URL: ${{ secrets.MEDIA_BASE_URL }}
+          VIDEO_BASE_URL: ${{ secrets.VIDEO_BASE_URL }}
+          HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}
+          HEYGEN_AVATAR_ID: ${{ secrets.HEYGEN_AVATAR_ID }}
+          HEYGEN_VOICE_ID: ${{ secrets.HEYGEN_VOICE_ID }}
+        run: |
+          cat <<EOF > .env
+          IG_USER_ID=${IG_USER_ID}
+          META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+          MEDIA_BASE_URL=${MEDIA_BASE_URL}
+          VIDEO_BASE_URL=${VIDEO_BASE_URL}
+          CALENDAR_XLSX=../calendario-editorial-30-dias.xlsx
+          CREATIVES_DIR=../criativos
+          HEYGEN_API_KEY=${HEYGEN_API_KEY}
+          HEYGEN_AVATAR_ID=${HEYGEN_AVATAR_ID}
+          HEYGEN_VOICE_ID=${HEYGEN_VOICE_ID}
+          EOF
+
+      - name: Publicar Reel
+        run: |
+          DAY="${{ github.event.inputs.day }}"
+          if [ -z "$DAY" ]; then
+            DAY="1"
+          fi
+          echo "Publicando Reel Dia $DAY..."
+          python reels_publisher.py publish --day "$DAY"
+
+      - name: Commitar publish_log.jsonl
+        if: success()
+        working-directory: .
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automacao/publish_log.jsonl 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Sem mudanças no log"
+          else
+            git commit -m "chore: reel publicado [skip ci]"
+            git push || echo "Push falhou"
+          fi
