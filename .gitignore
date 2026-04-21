@@ -13,8 +13,9 @@ automacao/token_short.txt
 .~lock.*
 ~$*
 
-# Pastas de vídeos gerados (muito grandes, hospedamos no release)
-videos_mp4/*.mp4
+# Vídeos MP4 ficam no repo (com Git LFS se crescer muito).
+# Instagram precisa URL raw pública — commitar é o jeito mais simples.
+# videos_mp4/*.mp4
 !videos_mp4/.gitkeep
 
 # OS

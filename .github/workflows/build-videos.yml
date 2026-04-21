@@ -67,12 +67,18 @@ jobs:
               --output "../videos_mp4/reel-dia-${dia_pad}.mp4"
           done
 
-      - name: Commitar MP4s no repo
+      - name: Listar arquivos gerados
+        working-directory: .
+        run: |
+          echo "Arquivos em videos_mp4/:"
+          ls -la videos_mp4/ || echo "(pasta não existe)"
+
+      - name: Commitar MP4s no repo (com -f caso .gitignore esteja mal configurado)
         working-directory: .
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add videos_mp4/*.mp4 2>/dev/null || true
+          git add -f videos_mp4/*.mp4 2>/dev/null || true
           git status
           git diff --cached --stat
           if git diff --cached --quiet; then
