@@ -30,7 +30,7 @@ from reels_publisher import REEL_MAP, generate_video, publish_reel
 
 
 BRT = timezone(timedelta(hours=-3))
-TIME_WINDOW_MINUTES = 90  # janela de ±90min ao redor do horário programado
+TIME_WINDOW_MINUTES = 120  # janela de ±2h cobre todos os horários do calendário
 
 
 def _scheduled_today_is_near_now(post: dict) -> tuple[bool, str]:
