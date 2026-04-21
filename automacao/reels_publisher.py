@@ -212,20 +212,26 @@ def publish_reel(day: int, cfg: dict, mp4_path: str | None = None) -> str:
     if not post:
         raise ValueError(f"Post do dia {day} não encontrado no calendário")
 
-    if mp4_path is None:
-        if day not in REEL_MAP:
-            raise ValueError(f"Dia {day} não tem Reel mapeado. Use o publisher de photo.")
-        _, mp4_name = REEL_MAP[day]
-        mp4_path = str(Path(__file__).parent.parent / "videos_mp4" / mp4_name)
-    if not Path(mp4_path).exists():
-        raise FileNotFoundError(f"MP4 não encontrado em {mp4_path} — gere antes com `generate`")
+    if day not in REEL_MAP:
+        raise ValueError(f"Dia {day} não tem Reel mapeado. Use o publisher de photo.")
+    _, mp4_name = REEL_MAP[day]
 
     caption = build_caption(post)
     print(f"→ Publicando Reel Dia {day}: {post['Titulo / Gancho']}")
 
-    print("  • Upload do MP4 para hosting público...")
-    video_url = upload_mp4(mp4_path, cfg)
-    print(f"    URL: {video_url}")
+    # Se VIDEO_BASE_URL está configurado (repo público), usa raw URL direto
+    # Caso contrário, faz upload pro release via GitHub API
+    if cfg.get("VIDEO_BASE_URL"):
+        video_url = f"{cfg['VIDEO_BASE_URL'].rstrip('/')}/{mp4_name}"
+        print(f"  • Video URL (raw repo): {video_url}")
+    else:
+        if mp4_path is None:
+            mp4_path = str(Path(__file__).parent.parent / "videos_mp4" / mp4_name)
+        if not Path(mp4_path).exists():
+            raise FileNotFoundError(f"MP4 não encontrado em {mp4_path} — gere antes com `generate`")
+        print("  • Upload do MP4 para hosting público...")
+        video_url = upload_mp4(mp4_path, cfg)
+        print(f"    URL: {video_url}")
 
     ig = ReelsIGClient(cfg["IG_USER_ID"], cfg["META_ACCESS_TOKEN"])
     print("  • Criando container Reel na Meta...")

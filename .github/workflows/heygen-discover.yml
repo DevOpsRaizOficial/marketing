@@ -1,0 +1,86 @@
+name: Descobrir IDs HeyGen (uma vez)
+
+# Lista avatares e voices da sua conta HeyGen e imprime os IDs
+# de "Photo Avatar" e "Teste1" pra você copiar e colar nos secrets.
+#
+# Rode uma única vez. Depois que salvar os secrets HEYGEN_AVATAR_ID e
+# HEYGEN_VOICE_ID, pode remover ou ignorar esse workflow.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: automacao
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Buscar Photo Avatar e Teste1
+        env:
+          HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json, os, sys, requests
+          API_KEY = os.environ["HEYGEN_API_KEY"]
+          H = {"X-Api-Key": API_KEY, "Accept": "application/json"}
+
+          print("=" * 70)
+          print("AVATARES")
+          print("=" * 70)
+          r = requests.get("https://api.heygen.com/v2/avatars", headers=H, timeout=30)
+          r.raise_for_status()
+          data = r.json().get("data", {})
+          all_avatars = data.get("avatars", []) + data.get("talking_photos", [])
+          matches = []
+          for a in all_avatars:
+              name = a.get("avatar_name") or a.get("talking_photo_name") or ""
+              aid = a.get("avatar_id") or a.get("talking_photo_id")
+              is_photo = "Photo" in name or "photo" in (a.get("avatar_style","") or "")
+              mark = " ← MATCH" if ("photo" in name.lower() or a.get("talking_photo_id")) else ""
+              if a.get("talking_photo_id"):
+                  mark = " ← TALKING PHOTO (seu Photo Avatar provavelmente)"
+              print(f"  {aid:<40} {name}{mark}")
+              if mark:
+                  matches.append((name, aid))
+
+          print()
+          print("=" * 70)
+          print("VOZES (filtradas pt/clone)")
+          print("=" * 70)
+          r = requests.get("https://api.heygen.com/v2/voices", headers=H, timeout=30)
+          r.raise_for_status()
+          voices = r.json().get("data", {}).get("voices", [])
+          for v in voices:
+              name = v.get("name", "")
+              vid = v.get("voice_id", "")
+              lang = v.get("language", "")
+              is_clone = v.get("support_pause") or v.get("emotion_support") or "clone" in name.lower() or "teste" in name.lower()
+              if is_clone or "pt" in lang.lower() or "portuguese" in lang.lower():
+                  mark = " ← MATCH (Teste1)" if "teste" in name.lower() else ""
+                  print(f"  {vid:<40} {name:<30} ({lang}){mark}")
+
+          print()
+          print("=" * 70)
+          print("SUMÁRIO - COPIA ESSES VALORES PROS SECRETS")
+          print("=" * 70)
+          # Photo Avatar: pega o primeiro talking_photo
+          photo = next((a for a in all_avatars if a.get("talking_photo_id")), None)
+          if photo:
+              pid = photo.get("talking_photo_id")
+              pname = photo.get("talking_photo_name", "?")
+              print(f"HEYGEN_AVATAR_ID={pid}  # ({pname})")
+          # Voice Teste1
+          teste = next((v for v in voices if "teste" in v.get("name","").lower()), None)
+          if teste:
+              print(f"HEYGEN_VOICE_ID={teste.get('voice_id')}  # ({teste.get('name')})")
+          print("=" * 70)
+          PY
