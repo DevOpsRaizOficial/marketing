@@ -13,6 +13,11 @@ on:
         description: "Dias a gerar (vírgula-separado, ex: 1,3,9,16,21,26). Vazio = todos."
         required: false
         default: ""
+      regenerate:
+        description: "Regerar mesmo se MP4 já existir no repo"
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -46,7 +51,7 @@ jobs:
           HEYGEN_VOICE_ID=${HEYGEN_VOICE_ID}
           EOF
 
-      - name: Gerar vídeos
+      - name: Gerar vídeos (tolerante a falhas individuais)
         run: |
           DAYS="${{ github.event.inputs.days }}"
           if [ -z "$DAYS" ]; then
@@ -54,18 +59,36 @@ jobs:
           fi
           IFS=',' read -ra DIAS <<< "$DAYS"
           mkdir -p ../videos_mp4
+          SUCCESS_COUNT=0
+          FAIL_COUNT=0
           for dia in "${DIAS[@]}"; do
             dia_pad=$(printf "%02d" $dia)
+            mp4_file="../videos_mp4/reel-dia-${dia_pad}.mp4"
+            # Se já existe, pula (idempotência)
+            if [ -f "$mp4_file" ] && [ "${{ github.event.inputs.regenerate }}" != "true" ]; then
+              echo "✓ Dia ${dia}: MP4 já existe, pulando"
+              SUCCESS_COUNT=$((SUCCESS_COUNT+1))
+              continue
+            fi
             script_file=$(ls ../roteiros/reel-dia-${dia_pad}-*.txt 2>/dev/null | head -1)
             if [ -z "$script_file" ]; then
               echo "⚠ Sem roteiro pra dia ${dia}, pulando"
               continue
             fi
             echo "→ Dia ${dia}: $script_file"
-            python heygen_client.py generate \
-              --script "$script_file" \
-              --output "../videos_mp4/reel-dia-${dia_pad}.mp4"
+            # Tenta gerar; se falhar (ex: cota), segue pros próximos
+            if python heygen_client.py generate --script "$script_file" --output "$mp4_file"; then
+              SUCCESS_COUNT=$((SUCCESS_COUNT+1))
+              echo "  ✓ Dia ${dia} gerado"
+            else
+              FAIL_COUNT=$((FAIL_COUNT+1))
+              echo "  ❌ Dia ${dia} falhou (cota HeyGen ou outro erro) — seguindo"
+            fi
           done
+          echo ""
+          echo "===== Resumo ====="
+          echo "Sucesso: $SUCCESS_COUNT | Falhas: $FAIL_COUNT"
+          # Não sai com erro — mesmo com falhas parciais, o commit step roda
 
       - name: Listar arquivos gerados
         working-directory: .
