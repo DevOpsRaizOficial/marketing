@@ -2,7 +2,8 @@
 automacao/.env
 automacao/.env.*
 !automacao/.env.example
-automacao/publish_log.jsonl
+# publish_log.jsonl FICA no repo (pra evitar publicar mesmo post 2x)
+# automacao/publish_log.jsonl
 automacao/publish.log
 automacao/token_short.txt
 **/__pycache__/

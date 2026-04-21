@@ -30,11 +30,15 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: write
     defaults:
       run:
         working-directory: automacao
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-python@v5
         with:
@@ -80,6 +84,24 @@ jobs:
             ARGS="$ARGS --dry-run"
           fi
           python publish_orchestrator.py $ARGS
+
+      - name: Commitar publish_log.jsonl (persistência entre runs)
+        if: success()
+        working-directory: .
+        run: |
+          if [ ! -f automacao/publish_log.jsonl ]; then
+            echo "Sem log novo"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automacao/publish_log.jsonl
+          if git diff --cached --quiet; then
+            echo "Log sem mudanças"
+          else
+            git commit -m "chore: registro de publicação [skip ci]"
+            git push || echo "Push falhou (ignorando pra não quebrar)"
+          fi
 
       - name: Upload logs (se houver)
         if: always()
