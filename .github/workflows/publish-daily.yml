@@ -103,7 +103,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add automacao/publish_log.jsonl
+          git add -f automacao/publish_log.jsonl
           if git diff --cached --quiet; then
             echo "Log sem mudanças"
           else

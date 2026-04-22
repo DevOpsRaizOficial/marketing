@@ -4,7 +4,7 @@
 !.env.example
 
 # Logs
-publish_log.jsonl
+# publish_log.jsonl FICA no repo (pra evitar publicar mesmo post 2x)
 publish.log
 *.log
 
