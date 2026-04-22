@@ -25,6 +25,11 @@ on:
         required: false
         type: boolean
         default: false
+      force:
+        description: "Ignora janela de horário + log de duplicatas (recovery manual)"
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   publish:
@@ -82,6 +87,9 @@ jobs:
           fi
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
+          fi
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            ARGS="$ARGS --force"
           fi
           python publish_orchestrator.py $ARGS
 
