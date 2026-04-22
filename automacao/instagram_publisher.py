@@ -257,25 +257,83 @@ def build_caption(post: dict) -> str:
     return "\n".join([p for p in partes if p is not None]).strip()
 
 
-def publish_post(post: dict, cfg: dict, dry_run: bool = False) -> None:
-    dia = post["Dia"]
-    caption = build_caption(post)
-    filename = creative_filename_for(post)
+CAROUSEL_SLIDES_MAP = {
+    2: ("docker", 5),
+    4: ("aws-custos", 5),
+    5: ("rag-ia", 5),
+    7: ("observabilidade", 5),
+    8: ("owasp", 5),
+    10: ("saas-multitenant", 5),
+    13: ("function-calling", 5),
+    14: ("venda-direta", 5),
+    15: ("slo-uptime", 5),
+    17: ("arq-finops", 5),
+    19: ("zero-trust", 5),
+    20: ("custo-ia", 5),
+    22: ("hotmart-billing", 5),
+    24: ("sre-alertas", 5),
+    25: ("sql-aws", 5),
+    27: ("lgpd", 4),
+    29: ("prompt-engineering", 5),
+    30: ("fechamento", 5),
+}
 
+
+def get_carousel_urls(day: int, cfg: dict) -> list[str] | None:
+    """Retorna URLs dos slides do carrossel se esse dia tiver carrossel.
+    None se for post de foto única (fallback)."""
+    if day not in CAROUSEL_SLIDES_MAP:
+        return None
+    nome, total = CAROUSEL_SLIDES_MAP[day]
+    base = cfg["MEDIA_BASE_URL"].rstrip("/")
+    return [f"{base}/{day:02d}-{nome}-slide-{n:02d}.png" for n in range(1, total + 1)]
+
+
+def publish_post(post: dict, cfg: dict, dry_run: bool = False) -> None:
+    dia = int(post["Dia"])
+    caption = build_caption(post)
+
+    # 1) Tenta carrossel primeiro (se for dia de carrossel)
+    carousel_urls = get_carousel_urls(dia, cfg)
+
+    print(f"→ Dia {dia} ({post['Data (2026)']}, {post['Horario']})")
+    print(f"  Título: {post['Titulo / Gancho']}")
+    print(f"  Caption: {len(caption)} caracteres")
+
+    if carousel_urls:
+        print(f"  Formato: CARROSSEL com {len(carousel_urls)} slides")
+        for i, u in enumerate(carousel_urls, 1):
+            print(f"    slide {i}: {u}")
+        if dry_run:
+            print("  [DRY-RUN] não chamando API da Meta.")
+            return
+        ig = IGClient(cfg["IG_USER_ID"], cfg["META_ACCESS_TOKEN"])
+        print("  • Criando containers dos slides e container carrossel...")
+        container_id = ig.create_carousel_container(carousel_urls, caption)
+        print(f"  • Carousel container: {container_id}")
+        print("  • Aguardando processamento (pode levar 1-2 min)...")
+        ig.wait_container_ready(container_id)
+        print("  • Publicando...")
+        media_id = ig.publish(container_id)
+        print(f"  ✓ CARROSSEL PUBLICADO! Media ID: {media_id}")
+        _append_log(cfg, {"type": "carousel", "dia": dia, "media_id": media_id,
+                          "slides": len(carousel_urls),
+                          "publicado_em": datetime.utcnow().isoformat()})
+        return
+
+    # 2) Fallback: foto única
+    filename = creative_filename_for(post)
     if not filename:
-        print(f"⚠  Dia {dia}: sem criativo mapeado em CREATIVES_DIR — pulando publicação automática.")
+        print(f"⚠  Dia {dia}: sem criativo mapeado — pulando publicação.")
         print(f"   Legenda está pronta em '{cfg['CALENDAR_XLSX']}'. Publique manualmente.")
         return
 
     image_url = f"{cfg['MEDIA_BASE_URL'].rstrip('/')}/{filename}"
-    print(f"→ Dia {dia} ({post['Data (2026)']}, {post['Horario']})")
-    print(f"  Título: {post['Titulo / Gancho']}")
+    print(f"  Formato: FOTO ÚNICA")
     print(f"  URL da imagem: {image_url}")
-    print(f"  Caption: {len(caption)} caracteres")
 
     if dry_run:
-        print("  [DRY-RUN] não chamando API da Meta. Caption preview:")
-        print("  " + caption.replace("\n", "\n  ")[:400] + "...")
+        print("  [DRY-RUN] não chamando API da Meta.")
         return
 
     ig = IGClient(cfg["IG_USER_ID"], cfg["META_ACCESS_TOKEN"])
@@ -287,7 +345,8 @@ def publish_post(post: dict, cfg: dict, dry_run: bool = False) -> None:
     print("  • Publicando...")
     media_id = ig.publish(container_id)
     print(f"  ✓ PUBLICADO! Media ID: {media_id}")
-    _append_log(cfg, {"dia": dia, "media_id": media_id, "publicado_em": datetime.utcnow().isoformat()})
+    _append_log(cfg, {"type": "foto", "dia": dia, "media_id": media_id,
+                      "publicado_em": datetime.utcnow().isoformat()})
 
 
 def _append_log(cfg: dict, entry: dict):
