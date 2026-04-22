@@ -202,8 +202,9 @@ class IGClient:
         })
         return resp["id"]
 
-    def wait_container_ready(self, container_id: str, timeout: int = 120) -> None:
-        """Aguarda Meta processar o container antes de publicar."""
+    def wait_container_ready(self, container_id: str, timeout: int = 300) -> None:
+        """Aguarda Meta processar o container antes de publicar.
+        Timeout 5min cobre vídeos grandes e momentos de fila."""
         deadline = time.time() + timeout
         while time.time() < deadline:
             r = self._get(container_id, {"fields": "status_code"})
@@ -215,10 +216,32 @@ class IGClient:
             time.sleep(4)
         raise TimeoutError(f"Container {container_id} não ficou pronto em {timeout}s")
 
-    def publish(self, container_id: str) -> str:
-        """Publica o container (step 2 de 2)."""
-        resp = self._post(f"{self.ig_id}/media_publish", {"creation_id": container_id})
-        return resp["id"]
+    def publish(self, container_id: str, max_retries: int = 6, initial_wait: int = 15) -> str:
+        """Publica o container (step 2 de 2).
+        Retry automático pro erro 2207027 ('Media is not ready') que acontece
+        quando o status FINISHED foi retornado cedo demais pela Meta.
+        """
+        # Pausa extra antes do 1º publish — Meta às vezes reporta FINISHED antes de estar 100% pronto
+        time.sleep(initial_wait)
+
+        last_err = None
+        for attempt in range(1, max_retries + 1):
+            try:
+                resp = self._post(f"{self.ig_id}/media_publish", {"creation_id": container_id})
+                return resp["id"]
+            except RuntimeError as e:
+                last_err = e
+                msg = str(e)
+                # Detecta erro específico de "mídia não pronta" (9007 / 2207027)
+                if "2207027" in msg or "not ready" in msg.lower():
+                    wait = 10 * attempt  # backoff: 10s, 20s, 30s, 40s, 50s, 60s
+                    print(f"  ⏳ Tentativa {attempt}/{max_retries}: media not ready. "
+                          f"Aguardando {wait}s antes de tentar de novo...")
+                    time.sleep(wait)
+                    continue
+                # Outros erros: re-levanta imediatamente
+                raise
+        raise RuntimeError(f"Publish falhou após {max_retries} tentativas. Último erro: {last_err}")
 
 
 # ------------------------------------------------------------ post pipeline --
