@@ -1,19 +1,23 @@
 name: Publicar post do dia — DEVOPSRAIZ
 
-# Roda 3x por dia, no horário dos slots mais comuns do calendário:
-#   08:00 BRT (11:00 UTC)  → posts da manhã
-#   12:00 BRT (15:00 UTC)  → posts do almoço
-#   19:00 BRT (22:00 UTC)  → posts da noite
-# O script checa se o post do dia atual tem um dos horários que "bate"
-# com o momento da execução e publica; caso contrário, só registra "nada a fazer".
+# Roda a cada 30min (7h-22h BRT + 21h-01h UTC) pra tolerar atrasos
+# do GitHub Actions scheduler (que pode pular ou atrasar 1-2h).
 #
-# Você também pode disparar manualmente pelo GitHub (Actions → Run workflow).
+# Proteções no orchestrator:
+#   1. Janela ±120min: só publica se horário do post está dentro da janela do agora
+#   2. publish_log.jsonl: evita publicar o mesmo post 2x no dia
+# Resultado: cada post sai UMA vez, no horário mais próximo do programado.
+#
+# Você também pode disparar manualmente (Actions → Run workflow).
 
 on:
   schedule:
-    - cron: "0 11 * * *"   # 08:00 BRT
-    - cron: "0 15 * * *"   # 12:00 BRT
-    - cron: "0 22 * * *"   # 19:00 BRT
+    # Rodamos a cada 30min entre 7h-22h BRT (10h-01h UTC) pra cobrir todos
+    # horários do calendário + tolerar atrasos do GitHub Actions (que são comuns).
+    # A janela ±120min no orchestrator + publish_log persistente garantem
+    # que cada post sai UMA vez só, no horário mais próximo do programado.
+    - cron: "0,30 10-23 * * *"
+    - cron: "0,30 0-1 * * *"
   workflow_dispatch:
     inputs:
       day:
