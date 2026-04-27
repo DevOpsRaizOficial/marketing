@@ -131,6 +131,7 @@ def creative_filename_for(post: dict) -> Optional[str]:
         3: "11-salario-devops-2026.png",
         4: "03-aws-custos-queimando.png",
         5: "07-rag-ia-pipeline.png",
+       6: "08-frase-junior-vs-senior.png",
         8: "04-owasp-top-10.png",
         10: "05-saas-multi-tenant.png",
         15: "06-slo-uptime-table.png",
