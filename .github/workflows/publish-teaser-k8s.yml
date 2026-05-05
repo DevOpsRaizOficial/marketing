@@ -1,0 +1,89 @@
+name: Publicar Teaser K8S (lead magnet)
+
+# Post EXTRA fora do calendário XLSX. Disparado manualmente quando você
+# quer empurrar o lead magnet "10 erros K8s" pra capturar leads via
+# ManyChat keyword K8S.
+#
+# Roda só por workflow_dispatch (zero cron — você decide quando).
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Simular sem publicar"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: automacao
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Criar .env a partir dos secrets
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          MEDIA_BASE_URL: ${{ secrets.MEDIA_BASE_URL }}
+        run: |
+          cat <<EOF > .env
+          IG_USER_ID=${IG_USER_ID}
+          META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+          MEDIA_BASE_URL=${MEDIA_BASE_URL}
+          CALENDAR_XLSX=../calendario-editorial-30-dias.xlsx
+          CREATIVES_DIR=../criativos
+          EOF
+
+      - name: Validar token Meta
+        run: python instagram_publisher.py check
+
+      - name: Publicar teaser K8S
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="--dry-run"
+          fi
+          python publish_teaser_k8s.py $ARGS
+
+      - name: Commitar publish_log.jsonl
+        if: success()
+        working-directory: .
+        run: |
+          if [ ! -f automacao/publish_log.jsonl ]; then
+            echo "Sem log novo"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f automacao/publish_log.jsonl
+          if git diff --cached --quiet; then
+            echo "Log sem mudanças"
+          else
+            git commit -m "chore: teaser K8S publicado [skip ci]"
+            git push || echo "Push falhou (ignorando)"
+          fi
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: teaser-k8s-logs-${{ github.run_id }}
+          path: automacao/publish_log.jsonl
+          if-no-files-found: ignore
+          retention-days: 30

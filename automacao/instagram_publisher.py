@@ -131,11 +131,14 @@ def creative_filename_for(post: dict) -> Optional[str]:
         3: "11-salario-devops-2026.png",
         4: "03-aws-custos-queimando.png",
         5: "07-rag-ia-pipeline.png",
-       6: "08-frase-junior-vs-senior.png",
+        6: "06-meme-k8s-junior.png",
         8: "04-owasp-top-10.png",
         10: "05-saas-multi-tenant.png",
+        11: "11-roadmap-devops-2026.png",  # ATENCAO: PNG ainda nao gerada — Day 11 ja passou
         15: "06-slo-uptime-table.png",
-        18: "08-frase-junior-vs-senior.png",
+        18: "18-frase-junior-pleno-senior.png",
+        23: "23-checklist-devops-pleno.png",
+        28: "28-testemunho-trilha.png",
         30: "09-fechamento-trilha-completa.png",
     }
     return mapping.get(dia)
