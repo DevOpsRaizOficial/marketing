@@ -65,6 +65,12 @@ def already_published_today(slug: str, log_path: Path) -> bool:
 # =============================================================================
 HASHTAGS_IA = "#ia #claude #chatgpt #manychat #instagram #automacao #marketingdigital #infoproduto #criadordeconteudo #marketing #devops #devopsraiz #leadmagnet #produtividade"
 
+OFERTA = """━━━━━━━━━━━━━━━━━
+🎁 PDF "Prompts de Automação IA" — 15 prompts prontos
+💰 R$ 49,90 (com cupom AUTOMACAO20: R$ 39,92)
+📱 Suporte WhatsApp pra Trilha completa: (11) 96482-3126
+━━━━━━━━━━━━━━━━━"""
+
 CAPTIONS = {
     "quinta01": (3, """🤖 AUTOMATIZE SUA ROTINA com Claude + ChatGPT + ManyChat
 
@@ -75,15 +81,17 @@ CAPTIONS = {
 → ManyChat executa o flow
 
 No carrossel:
-✅ Como subir o PDF (lead magnet) no ManyChat
+✅ Como subir o PDF no ManyChat
 ✅ Como configurar o flow de boas-vindas + captura de email
 ✅ Checklist de teste em 7 etapas
 
 Esse é exatamente o pipeline que uso pra capturar leads automaticamente nos posts do @devopsraiz_oficial.
 
-Quer o PDF completo com TODOS os prompts que uso em Claude/ChatGPT pra montar essa automação do zero?
+Quer o PDF completo com 15 prompts prontos (5 Claude + 5 ChatGPT + 5 ManyChat) pra montar SUA automação do zero?
 
-💬 Comenta EU QUERO nesse post que mando o PDF direto no seu DM 📨
+""" + OFERTA + """
+
+💬 Comenta EU QUERO que envio o link de checkout direto no seu DM (com cupom já aplicado) 📨
 
 💾 Salva pra revisar quando for montar a sua.
 
@@ -104,9 +112,11 @@ No carrossel mostro o setup REAL que tá rodando no @devopsraiz_oficial:
 
 O segredo é simples: arquivo certo + mensagem certa + CTA certo.
 
-Quer o PDF com 15+ prompts prontos pra usar em Claude e ChatGPT pra montar SUA automação?
+Quer o PDF com 15 prompts prontos pra usar em Claude e ChatGPT pra montar SUA automação?
 
-💬 Comenta EU QUERO que envio direto pro seu DM 📨
+""" + OFERTA + """
+
+💬 Comenta EU QUERO que envio o link com cupom aplicado direto no seu DM 📨
 
 📌 Salva pra não perder.
 
@@ -123,11 +133,13 @@ No carrossel:
 ✅ Etapa 2: arquivo + estrutura do flow (BOAS-VINDAS → CAPTURA → LINK → FOLLOW GATE OFF)
 ✅ Etapa 3: validar e publicar (checklist de 7 testes)
 
-Esse é o framework que sigo TODA semana pra criar uma nova automação. Funciona pra creator, infoproduto e rotina diária.
+Esse é o framework que sigo TODA semana pra criar nova automação. Funciona pra creator, infoproduto e rotina diária.
 
 Quer o PDF "Prompts de Automação" com os comandos prontos que uso em Claude e ChatGPT?
 
-💬 Comenta EU QUERO que mando direto no seu DM 📨
+""" + OFERTA + """
+
+💬 Comenta EU QUERO que envio o link com cupom aplicado direto no seu DM 📨
 
 🔖 Salva esse carrossel — vai precisar quando for montar a sua.
 
