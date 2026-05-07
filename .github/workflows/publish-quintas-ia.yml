@@ -1,0 +1,110 @@
+name: Publicar Carrossel IA+ManyChat (quintas)
+
+# Roda em loop a cada 30min nas quintas-feiras de 13h-15h UTC (10h-12h BRT).
+# O Python detecta a data e dispara o carrossel correspondente:
+#   - 07/05 (quinta) → quinta01 (Automatize sua rotina)
+#   - 14/05 (quinta) → quinta02 (Do caos ao automático)
+#   - 21/05 (quinta) → quinta03 (Playbook de automação)
+#
+# Se a data atual não bate com nenhuma quinta agendada, sai sem fazer nada.
+# Anti-duplicate: usa publish_log.jsonl pra não publicar 2x no mesmo dia.
+
+on:
+  schedule:
+    # Quintas (DOW=4) entre 13h-15h UTC = 10h-12h BRT, a cada 30min
+    - cron: "0,30 13-15 * * 4"
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Slug específico (quinta01, quinta02, quinta03). Vazio = auto."
+        required: false
+        type: string
+      dry_run:
+        description: "Simular sem publicar"
+        required: false
+        type: boolean
+        default: false
+      force:
+        description: "Ignora log de duplicatas (recovery manual)"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: automacao
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Criar .env a partir dos secrets
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          MEDIA_BASE_URL: ${{ secrets.MEDIA_BASE_URL }}
+        run: |
+          cat <<EOF > .env
+          IG_USER_ID=${IG_USER_ID}
+          META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+          MEDIA_BASE_URL=${MEDIA_BASE_URL}
+          EOF
+
+      - name: Validar token Meta
+        run: python instagram_publisher.py check
+
+      - name: Publicar carrossel da quinta
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.slug }}" ]; then
+            ARGS="--slug ${{ github.event.inputs.slug }}"
+          else
+            ARGS="--auto"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            ARGS="$ARGS --force"
+          fi
+          python publish_carrossel_extra.py $ARGS
+
+      - name: Commitar publish_log.jsonl
+        if: success()
+        working-directory: .
+        run: |
+          if [ ! -f automacao/publish_log.jsonl ]; then
+            echo "Sem log novo"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f automacao/publish_log.jsonl
+          if git diff --cached --quiet; then
+            echo "Log sem mudanças"
+          else
+            git commit -m "chore: carrossel quinta IA publicado [skip ci]"
+            git push || echo "Push falhou (ignorando)"
+          fi
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quintas-ia-logs-${{ github.run_id }}
+          path: automacao/publish_log.jsonl
+          if-no-files-found: ignore
+          retention-days: 30

@@ -5,7 +5,10 @@
       "Bash(git:*)",
       "Bash(gh auth:*)",
       "Bash(where gh:*)",
-      "Bash(ssh-keygen:*)"
+      "Bash(ssh-keygen:*)",
+      "Bash(gh workflow:*)",
+      "Bash(echo:*)",
+      "Bash(curl:*)"
     ]
   }
 }
