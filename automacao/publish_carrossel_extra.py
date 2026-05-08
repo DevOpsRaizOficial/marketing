@@ -67,9 +67,13 @@ HASHTAGS_IA = "#ia #claude #chatgpt #manychat #instagram #automacao #marketingdi
 
 OFERTA = """━━━━━━━━━━━━━━━━━
 🎁 PDF "Prompts de Automação IA" — 15 prompts prontos
-💰 R$ 49,90 (com cupom AUTOMACAO20: R$ 39,92)
+💰 R$ 49,90 → 20% OFF com cupom AUTOMACAO20 (R$ 39,92)
+🔥 SEGUIDORES: 90% OFF com cupom SIGO (R$ 4,98)
 📱 Suporte WhatsApp pra Trilha completa: (11) 96482-3126
-━━━━━━━━━━━━━━━━━"""
+━━━━━━━━━━━━━━━━━
+
+💬 Comenta EU QUERO → recebe link com 20% off direto no DM
+💬 Comenta SIGO (e me segue) → recebe link com 90% off no DM"""
 
 CAPTIONS = {
     "quinta01": (3, """🤖 AUTOMATIZE SUA ROTINA com Claude + ChatGPT + ManyChat
@@ -90,8 +94,6 @@ Esse é exatamente o pipeline que uso pra capturar leads automaticamente nos pos
 Quer o PDF completo com 15 prompts prontos (5 Claude + 5 ChatGPT + 5 ManyChat) pra montar SUA automação do zero?
 
 """ + OFERTA + """
-
-💬 Comenta EU QUERO que envio o link de checkout direto no seu DM (com cupom já aplicado) 📨
 
 💾 Salva pra revisar quando for montar a sua.
 
@@ -116,8 +118,6 @@ Quer o PDF com 15 prompts prontos pra usar em Claude e ChatGPT pra montar SUA au
 
 """ + OFERTA + """
 
-💬 Comenta EU QUERO que envio o link com cupom aplicado direto no seu DM 📨
-
 📌 Salva pra não perder.
 
 """ + HASHTAGS_IA),
@@ -138,8 +138,6 @@ Esse é o framework que sigo TODA semana pra criar nova automação. Funciona pr
 Quer o PDF "Prompts de Automação" com os comandos prontos que uso em Claude e ChatGPT?
 
 """ + OFERTA + """
-
-💬 Comenta EU QUERO que envio o link com cupom aplicado direto no seu DM 📨
 
 🔖 Salva esse carrossel — vai precisar quando for montar a sua.
 
