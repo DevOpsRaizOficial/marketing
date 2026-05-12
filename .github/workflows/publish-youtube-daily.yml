@@ -10,8 +10,10 @@ name: Publicar aula + short do dia no YouTube
 # escolhendo um dia específico ou o pipeline todo.
 
 on:
-  schedule:
-    - cron: "0 12 * * *"   # 9h BRT
+  # cron desativado — fluxo agora e so shorts (publish-shorts-daily.yml).
+  # Mantido aqui pra possivel uso manual via workflow_dispatch no futuro.
+  # schedule:
+  #   - cron: "0 12 * * *"   # 9h BRT
   workflow_dispatch:
     inputs:
       day:
