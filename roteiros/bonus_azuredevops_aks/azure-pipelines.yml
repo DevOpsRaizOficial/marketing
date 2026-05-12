@@ -1,0 +1,146 @@
+# ==============================================================================
+# Pipeline Azure DevOps: Docker → ACR → AKS
+# Canal @DevOpsRaiz — Trilha DEVOPSRAIZ
+#
+# Testado em: Azure DevOps Services (maio/2026), Ubuntu 22.04 agent,
+#             ACR + AKS provisionados na região eastus2.
+#
+# Pré-requisitos no Azure DevOps:
+#   1) Service Connection do tipo "Docker Registry" apontando pro ACR
+#      (Name = devopsraiz-acr-connection)
+#   2) Service Connection do tipo "Kubernetes" apontando pro AKS
+#      (Name = devopsraiz-aks-connection, namespace = production)
+#   3) Variables (Library): pode também criar como Variable Group "devopsraiz-vars"
+#        - imageName              = devopsraiz/tarefas-api
+#        - acrName                = devopsraizacr.azurecr.io
+#        - aksNamespace           = production
+#        - aksDeploymentName      = tarefas-api
+# ==============================================================================
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - "src/**"
+      - "Dockerfile"
+      - "k8s/**"
+      - "azure-pipelines.yml"
+
+variables:
+  # Variáveis técnicas do pipeline
+  imageRepository: "devopsraiz/tarefas-api"
+  containerRegistry: "devopsraizacr.azurecr.io"
+  dockerfilePath: "$(Build.SourcesDirectory)/Dockerfile"
+  imageTag: "$(Build.BuildId)"
+  vmImage: "ubuntu-22.04"
+
+  # Variáveis Kubernetes
+  namespace: "production"
+  deploymentName: "tarefas-api"
+  serviceConnectionDocker: "devopsraiz-acr-connection"
+  serviceConnectionK8s: "devopsraiz-aks-connection"
+
+stages:
+# ==============================================================================
+# Stage 1: Build + Push imagem Docker pro Azure Container Registry
+# ==============================================================================
+- stage: Build
+  displayName: "Build Docker image"
+  jobs:
+  - job: BuildAndPush
+    displayName: "Build and push to ACR"
+    pool:
+      vmImage: $(vmImage)
+    steps:
+    - checkout: self
+      fetchDepth: 1
+
+    - task: Docker@2
+      displayName: "Login to Azure Container Registry"
+      inputs:
+        command: "login"
+        containerRegistry: $(serviceConnectionDocker)
+
+    - task: Docker@2
+      displayName: "Build and push image"
+      inputs:
+        command: "buildAndPush"
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(serviceConnectionDocker)
+        buildContext: $(Build.SourcesDirectory)
+        tags: |
+          $(imageTag)
+          latest
+
+    # Salva o manifesto k8s no artifact pra Stage 2 consumir
+    - publish: $(Build.SourcesDirectory)/k8s
+      artifact: manifests
+      displayName: "Publish k8s manifests as artifact"
+
+# ==============================================================================
+# Stage 2: Deploy no AKS
+# ==============================================================================
+- stage: Deploy
+  displayName: "Deploy to AKS"
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: DeployAKS
+    displayName: "Deploy to AKS production namespace"
+    pool:
+      vmImage: $(vmImage)
+    environment: "production.aks"
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: manifests
+
+          - task: KubernetesManifest@1
+            displayName: "Apply manifest (with rolling update)"
+            inputs:
+              action: "deploy"
+              connectionType: "kubernetesServiceConnection"
+              kubernetesServiceConnection: $(serviceConnectionK8s)
+              namespace: $(namespace)
+              manifests: |
+                $(Pipeline.Workspace)/manifests/deployment.yaml
+                $(Pipeline.Workspace)/manifests/service.yaml
+                $(Pipeline.Workspace)/manifests/ingress.yaml
+              containers: "$(containerRegistry)/$(imageRepository):$(imageTag)"
+
+          - task: Kubernetes@1
+            displayName: "Validate rollout"
+            inputs:
+              connectionType: "Kubernetes Service Connection"
+              kubernetesServiceEndpoint: $(serviceConnectionK8s)
+              namespace: $(namespace)
+              command: "rollout"
+              arguments: "status deployment/$(deploymentName) --timeout=180s"
+
+# ==============================================================================
+# Stage 3 (opcional): Smoke test pós-deploy
+# Descomenta se quiser validar /health antes de marcar deploy como sucesso.
+# ==============================================================================
+# - stage: SmokeTest
+#   displayName: "Smoke test pós-deploy"
+#   dependsOn: Deploy
+#   condition: succeeded()
+#   jobs:
+#   - job: HealthCheck
+#     steps:
+#     - script: |
+#         API_URL="https://api.devopsraiz.com.br/health"
+#         for i in 1 2 3 4 5; do
+#           STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "$API_URL" || echo "fail")
+#           echo "Tentativa $i: $STATUS"
+#           if [ "$STATUS" = "200" ]; then exit 0; fi
+#           sleep 10
+#         done
+#         echo "Smoke test falhou — /health não retornou 200"
+#         exit 1
+#       displayName: "GET /health"

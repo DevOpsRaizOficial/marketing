@@ -1,0 +1,161 @@
+name: Publicar short diario (YouTube + Instagram)
+
+# Cron diaria as 9h BRT (12h UTC).
+# Para cada dia (1..30) da serie DEVOPSRAIZ:
+#   1. Gera o MP4 do short (HeyGen Mateo, max 10s)
+#   2. Faz upload no YouTube Shorts (private — revisao manual antes de publico)
+#   3. Faz upload no Instagram Reels (publico, share_to_feed=true)
+#
+# Aulas long-form foram removidas do funil. Conteudo vai pra PDF de Apoio.
+
+on:
+  schedule:
+    - cron: "0 12 * * *"   # 9h BRT
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "Dia da serie (1-30). Vazio = hoje (DIA_BASE + delta)"
+        required: false
+        default: ""
+      privacy:
+        description: "YouTube privacy: private | unlisted | public"
+        required: false
+        default: "private"
+      regenerate:
+        description: "Forcar regeracao mesmo se MP4 ja existir"
+        required: false
+        type: boolean
+        default: false
+      skip_youtube:
+        description: "Pular YouTube"
+        required: false
+        type: boolean
+        default: false
+      skip_instagram:
+        description: "Pular Instagram"
+        required: false
+        type: boolean
+        default: false
+
+env:
+  DIA_BASE: "2026-05-12"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: marketing/automacao
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar deps
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          pip install -r requirements.txt
+          pip install google-api-python-client google-auth-oauthlib google-auth-httplib2
+
+      - name: Criar .env a partir de secrets
+        env:
+          HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}
+          HEYGEN_AVATAR_ID_MATEO: ${{ secrets.HEYGEN_AVATAR_ID_MATEO }}
+          HEYGEN_VOICE_ID_MATEO: ${{ secrets.HEYGEN_VOICE_ID_MATEO }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
+          YOUTUBE_PLAYLIST_SHORTS: ${{ vars.YOUTUBE_PLAYLIST_SHORTS }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          GITHUB_RELEASES_TOKEN: ${{ secrets.GITHUB_RELEASES_TOKEN }}
+          GITHUB_REPO: ${{ vars.GITHUB_REPO }}
+          VIDEO_HOSTING: ${{ vars.VIDEO_HOSTING }}
+          VIDEO_BASE_URL: ${{ vars.VIDEO_BASE_URL }}
+        run: |
+          cat <<EOF > .env
+          HEYGEN_API_KEY=${HEYGEN_API_KEY}
+          HEYGEN_AVATAR_ID_MATEO=${HEYGEN_AVATAR_ID_MATEO}
+          HEYGEN_VOICE_ID_MATEO=${HEYGEN_VOICE_ID_MATEO}
+          YOUTUBE_CLIENT_ID=${YOUTUBE_CLIENT_ID}
+          YOUTUBE_CLIENT_SECRET=${YOUTUBE_CLIENT_SECRET}
+          YOUTUBE_REFRESH_TOKEN=${YOUTUBE_REFRESH_TOKEN}
+          YOUTUBE_CHANNEL_ID=${YOUTUBE_CHANNEL_ID}
+          YOUTUBE_PLAYLIST_SHORTS=${YOUTUBE_PLAYLIST_SHORTS}
+          IG_USER_ID=${IG_USER_ID}
+          META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+          GITHUB_TOKEN=${GITHUB_RELEASES_TOKEN}
+          GITHUB_REPO=${GITHUB_REPO}
+          VIDEO_HOSTING=${VIDEO_HOSTING:-github}
+          VIDEO_BASE_URL=${VIDEO_BASE_URL}
+          CALENDAR_XLSX=../calendario-editorial-30-dias.xlsx
+          CREATIVES_DIR=../criativos
+          EOF
+
+      - name: Calcular dia
+        id: dia
+        run: |
+          INPUT_DAY="${{ github.event.inputs.day }}"
+          if [ -n "$INPUT_DAY" ]; then
+            echo "day=$INPUT_DAY" >> $GITHUB_OUTPUT
+          else
+            BASE_TS=$(date -d "${{ env.DIA_BASE }}" +%s)
+            NOW_TS=$(date +%s)
+            DIA=$(( (NOW_TS - BASE_TS) / 86400 + 1 ))
+            if [ $DIA -lt 1 ] || [ $DIA -gt 30 ]; then
+              echo "Dia $DIA fora do range 1-30, encerrando workflow."
+              exit 0
+            fi
+            echo "day=$DIA" >> $GITHUB_OUTPUT
+          fi
+
+      # === 1) Geracao HeyGen (somente short) ===
+      - name: Gerar short (HeyGen Mateo, max 10s)
+        run: |
+          python heygen_mateo_pipeline.py short --day ${{ steps.dia.outputs.day }} \
+            || echo "::warning::Geracao de short falhou"
+
+      - name: Commitar MP4 no repo
+        working-directory: marketing
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f videos_mp4/*.mp4 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "feat: short dia ${{ steps.dia.outputs.day }} gerado"
+            git push
+          fi
+
+      # === 2) Publicacao YouTube Shorts ===
+      - name: Publicar no YouTube Shorts
+        if: github.event.inputs.skip_youtube != 'true'
+        run: |
+          python youtube_publisher.py --kind short --day ${{ steps.dia.outputs.day }} \
+                                       --privacy ${{ github.event.inputs.privacy || 'private' }} \
+            || echo "::warning::Publicacao YouTube falhou"
+
+      # === 3) Publicacao Instagram Reels ===
+      - name: Publicar no Instagram Reels
+        if: github.event.inputs.skip_instagram != 'true'
+        run: |
+          python publish_short_to_ig.py --day ${{ steps.dia.outputs.day }} \
+            || echo "::warning::Publicacao Instagram falhou (verifique IG_USER_ID, META_ACCESS_TOKEN, VIDEO_BASE_URL)"
+
+      # === 4) Commitar logs ===
+      - name: Commitar logs de publicacao
+        working-directory: marketing
+        run: |
+          git add -f automacao/publish_log_youtube.jsonl \
+                      automacao/publish_log_ig_shorts.jsonl 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: logs publicacao dia ${{ steps.dia.outputs.day }}"
+            git push
+          fi

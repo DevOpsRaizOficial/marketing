@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tarefas-api
+  namespace: production
+  annotations:
+    # AGIC (Application Gateway Ingress Controller) padrão do AKS
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/health-probe-path: "/health"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+        - api.devopsraiz.com.br
+      secretName: tarefas-api-tls
+  rules:
+    - host: api.devopsraiz.com.br
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tarefas-api
+                port:
+                  number: 80

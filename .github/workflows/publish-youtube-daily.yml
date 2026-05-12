@@ -1,0 +1,150 @@
+name: Publicar aula + short do dia no YouTube
+
+# Roda 1x por dia às 9h BRT (12h UTC).
+# Para cada dia (1..30) do calendário:
+#   1. Gera o MP4 da aula long-form (HeyGen Mateo + cenas Pixar) se ainda não existir
+#   2. Gera o MP4 do short se ainda não existir
+#   3. Faz upload pro canal @DevOpsRaiz como "private" (revisão manual antes de tornar público)
+#
+# Você pode disparar manualmente em Actions → Run workflow,
+# escolhendo um dia específico ou o pipeline todo.
+
+on:
+  schedule:
+    - cron: "0 12 * * *"   # 9h BRT
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "Dia do calendário (1-30). Vazio = hoje (calculado a partir de DIA_BASE)"
+        required: false
+        default: ""
+      privacy:
+        description: "private | unlisted | public"
+        required: false
+        default: "private"
+      regenerate:
+        description: "Forçar regeração mesmo se MP4 já existir"
+        required: false
+        type: boolean
+        default: false
+      kind:
+        description: "aula | short | both"
+        required: false
+        default: "both"
+
+env:
+  # data de início da série; usado pra calcular "dia de hoje" baseado em hoje - DIA_BASE
+  DIA_BASE: "2026-05-12"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: marketing/automacao
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar deps
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          pip install -r requirements.txt
+          pip install google-api-python-client google-auth-oauthlib google-auth-httplib2
+
+      - name: Criar .env a partir de secrets
+        env:
+          HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}
+          HEYGEN_AVATAR_ID_MATEO: ${{ secrets.HEYGEN_AVATAR_ID_MATEO }}
+          HEYGEN_VOICE_ID_MATEO: ${{ secrets.HEYGEN_VOICE_ID_MATEO }}
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PIXAR_BACKEND: ${{ vars.PIXAR_BACKEND }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
+          YOUTUBE_PLAYLIST_AULAS: ${{ vars.YOUTUBE_PLAYLIST_AULAS }}
+          YOUTUBE_PLAYLIST_SHORTS: ${{ vars.YOUTUBE_PLAYLIST_SHORTS }}
+        run: |
+          cat <<EOF > .env
+          HEYGEN_API_KEY=${HEYGEN_API_KEY}
+          HEYGEN_AVATAR_ID_MATEO=${HEYGEN_AVATAR_ID_MATEO}
+          HEYGEN_VOICE_ID_MATEO=${HEYGEN_VOICE_ID_MATEO}
+          REPLICATE_API_TOKEN=${REPLICATE_API_TOKEN}
+          OPENAI_API_KEY=${OPENAI_API_KEY}
+          PIXAR_BACKEND=${PIXAR_BACKEND:-replicate}
+          YOUTUBE_CLIENT_ID=${YOUTUBE_CLIENT_ID}
+          YOUTUBE_CLIENT_SECRET=${YOUTUBE_CLIENT_SECRET}
+          YOUTUBE_REFRESH_TOKEN=${YOUTUBE_REFRESH_TOKEN}
+          YOUTUBE_CHANNEL_ID=${YOUTUBE_CHANNEL_ID}
+          YOUTUBE_PLAYLIST_AULAS=${YOUTUBE_PLAYLIST_AULAS}
+          YOUTUBE_PLAYLIST_SHORTS=${YOUTUBE_PLAYLIST_SHORTS}
+          EOF
+
+      - name: Calcular dia
+        id: dia
+        run: |
+          INPUT_DAY="${{ github.event.inputs.day }}"
+          if [ -n "$INPUT_DAY" ]; then
+            echo "day=$INPUT_DAY" >> $GITHUB_OUTPUT
+          else
+            BASE_TS=$(date -d "${{ env.DIA_BASE }}" +%s)
+            NOW_TS=$(date +%s)
+            DIA=$(( (NOW_TS - BASE_TS) / 86400 + 1 ))
+            if [ $DIA -lt 1 ] || [ $DIA -gt 30 ]; then
+              echo "Dia $DIA fora do range 1-30, encerrando workflow."
+              exit 0
+            fi
+            echo "day=$DIA" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Gerar aula long-form (HeyGen Mateo + Pixar)
+        if: github.event.inputs.kind == 'both' || github.event.inputs.kind == 'aula' || github.event.inputs.kind == ''
+        run: |
+          python heygen_mateo_pipeline.py aula --day ${{ steps.dia.outputs.day }} || echo "Geração de aula falhou, segue pro short"
+
+      - name: Gerar short
+        if: github.event.inputs.kind == 'both' || github.event.inputs.kind == 'short' || github.event.inputs.kind == ''
+        run: |
+          python heygen_mateo_pipeline.py short --day ${{ steps.dia.outputs.day }} || echo "Geração de short falhou"
+
+      - name: Commitar MP4s
+        working-directory: marketing
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f videos_mp4/*.mp4 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "feat: vídeos dia ${{ steps.dia.outputs.day }} gerados"
+            git push
+          fi
+
+      - name: Publicar aula no YouTube
+        if: github.event.inputs.kind == 'both' || github.event.inputs.kind == 'aula' || github.event.inputs.kind == ''
+        run: |
+          python youtube_publisher.py --kind aula --day ${{ steps.dia.outputs.day }} \
+                                       --privacy ${{ github.event.inputs.privacy || 'private' }}
+
+      - name: Publicar short no YouTube
+        if: github.event.inputs.kind == 'both' || github.event.inputs.kind == 'short' || github.event.inputs.kind == ''
+        run: |
+          python youtube_publisher.py --kind short --day ${{ steps.dia.outputs.day }} \
+                                       --privacy ${{ github.event.inputs.privacy || 'private' }}
+
+      - name: Commitar log de publicações
+        working-directory: marketing
+        run: |
+          git add -f automacao/publish_log_youtube.jsonl || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: log publicações YouTube dia ${{ steps.dia.outputs.day }}"
+            git push
+          fi
