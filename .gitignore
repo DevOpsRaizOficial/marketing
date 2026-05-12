@@ -25,3 +25,9 @@ Thumbs.db
 # Editor
 .idea/
 .vscode/
+
+# Tokens OAuth (Google, etc) - NUNCA comite
+**/credentials.json
+**/token.json
+**/client_secret*.json
+*.pem
