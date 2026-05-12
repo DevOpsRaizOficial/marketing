@@ -48,7 +48,7 @@ jobs:
       contents: write
     defaults:
       run:
-        working-directory: marketing/automacao
+        working-directory: automacao
     steps:
       - uses: actions/checkout@v4
         with:
@@ -124,7 +124,7 @@ jobs:
             || echo "::warning::Geracao de short falhou"
 
       - name: Commitar MP4 no repo
-        working-directory: marketing
+        working-directory: .
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -151,7 +151,7 @@ jobs:
 
       # === 4) Commitar logs ===
       - name: Commitar logs de publicacao
-        working-directory: marketing
+        working-directory: .
         run: |
           git add -f automacao/publish_log_youtube.jsonl \
                       automacao/publish_log_ig_shorts.jsonl 2>/dev/null || true
